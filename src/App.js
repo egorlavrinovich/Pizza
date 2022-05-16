@@ -9,7 +9,7 @@ function App() {
             <img width="38" src={logo} alt="Pizza logo" />
             <div>
               <h1>Egor Pizza</h1>
-              <p>Одна из лучших пицц в твоём городе!</p>
+              <p className="motto">Одна из лучших пицц в твоём городе!</p>
             </div>
           </div>
           <div className="header__cart">
