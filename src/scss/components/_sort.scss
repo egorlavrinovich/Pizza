@@ -8,10 +8,15 @@
 
     svg {
       margin-right: 8px;
+      transition: all 0.3s;
+      &:hover {
+        transform: rotate(180deg);
+      }
     }
 
     b {
       margin-right: 8px;
+      cursor: pointer;
     }
 
     span {
@@ -22,6 +27,7 @@
   }
 
   &__popup {
+    transition: all 0.3s;
     position: absolute;
     right: 0;
     margin-top: 15px;
@@ -50,35 +56,40 @@
       }
     }
   }
-  .mediasort {
-    ul {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-around;
-      height: 46px;
-      align-items: center;
-      cursor: pointer;
-      min-width: 100px;
-      min-height: 50px;
-      li {
-        border-radius: 30px;
-        font-weight: bold;
-        background-color: #f9f9f9;
-        padding: 13px 30px;
-        transition: all 0.3s;
-      }
-      li:last-child {
-        color: red;
-      }
-      li:hover {
-        background-color: black;
-        color: white;
-      }
+}
+.mediasort {
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    height: 46px;
+    align-items: center;
+    cursor: pointer;
+    min-width: 100px;
+    min-height: 50px;
+    li {
+      border-radius: 30px;
+      font-weight: bold;
+      background-color: #f9f9f9;
+      padding: 13px 30px;
+      transition: all 0.3s;
+      flex-grow: 1;
+      text-align: center;
+    }
+    li:hover {
+      background-color: black;
+      color: white;
     }
   }
 }
+
 @media screen and (min-width: 814px) {
   .mediasort {
+    display: none;
+  }
+}
+@media screen and (max-width: 814px) {
+  .sort {
     display: none;
   }
 }

@@ -36,8 +36,8 @@ body {
   &__items {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 10px;
+    justify-content: center;
+    gap: 30px;
   }
   @media screen and (max-width: 683px) {
     &__items {
