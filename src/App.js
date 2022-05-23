@@ -2,7 +2,7 @@ import "./scss/app.scss";
 import Header from "./components/header/header";
 import Panel from "./components/SortPanel/Panel/Panel";
 import Pizza from "./components/Pizza-block/PizzaItem/Pizza";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 function App() {
   const [posts, setposts] = useState([
@@ -112,36 +112,36 @@ function App() {
       sale: true,
     },
   ]);
-  const [filter, setfilter] = useState(posts);
-  const [categories, setcategories] = useState(filter);
-  const sort = (item) => {
-    if (item) {
-      if (item === "price") {
-        setfilter([...posts.sort((a, b) => a[item] - b[item])]);
-      } else {
-        setfilter([...posts.sort((a, b) => b[item] - a[item])]); // ??? Допилить
-      }
+  const [SearchItem,SetSearchItem] = useState("")
+  const [SearchCategory,SetSearchCategory] = useState("")
+  const SortedPosts = useMemo(()=>{
+    if (SearchItem) {
+    if (SearchItem === "price") {
+      return([...posts.sort((a, b) => a[SearchItem] - b[SearchItem])]);
+    } else {
+      return([...posts.sort((a, b) => b[SearchItem] - a[SearchItem])]); // ??? Допилить
     }
-  };
-  const Categories = (item) => {
-    if (item) {
-      if (item == "all") {
-        setcategories(posts);
-      } else {
-        setcategories([...filter.filter((items) => items[item] == true)]);
-      }
-    }
-  };
+  }return posts
+},[posts,SearchItem])
+  const ChoosedCategory = useMemo(()=>{
+    if (SearchCategory) {
+          if (SearchCategory == "all") {
+            return posts
+          } else {
+            return([...posts.filter((items) => items[SearchCategory] == true)]);
+          }
+        }return posts
+  },[posts,SortedPosts,SearchCategory])
 
   return (
     <div className="wrapper">
       <Header></Header>
       <div className="content">
         <div className="container">
-          <Panel sort={sort} categories={Categories}></Panel>
+          <Panel sort={SetSearchItem} categories={SetSearchCategory} ></Panel>
           <h2 className="content__title">Все пиццы</h2>
           <div className="content__items">
-            <Pizza pizza={categories} />
+            <Pizza pizza={ChoosedCategory} />
           </div>
         </div>
       </div>
