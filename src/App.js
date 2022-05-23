@@ -112,8 +112,8 @@ function App() {
       sale: true,
     },
   ]);
-  const [SearchItem,SetSearchItem] = useState("")
-  const [SearchCategory,SetSearchCategory] = useState("")
+  const [SearchItem,SetSearchItem] = useState("") // Сортировка: Цена, популярность
+  const [SearchCategory,SetSearchCategory] = useState("") // Категории
   const SortedPosts = UseSortedPosts(SearchCategory,SearchItem,posts) // Кастомный хук сортировки
 
   return (

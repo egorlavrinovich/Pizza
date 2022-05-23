@@ -6,12 +6,18 @@ const Pizza = ({ pizza }) => {
   const [state, setstate] = useState({ dough: "традиционное", length: 26 });
   const typeNames = ["тонкое", "традиционное"];
   const sizes = [26, 30, 40];
+  const [Price,SetPrice] = useState("0")
+  const [Goods,SetGoods] = useState(0)
   function AddDough(param) {
     setstate({ ...state, dough: param });
   }
   function AddLength(params) {
     setstate({ ...state, length: params });
   }
+  function AddGoods() {
+    SetGoods((x)=>x+1)
+  }
+  console.log(Goods)
   return (
     <>
       {pizza.map((item, id) => (
@@ -48,7 +54,7 @@ const Pizza = ({ pizza }) => {
           </div>
           <div className="pizza-block__bottom">
             <div className="pizza-block__price">{item.price}</div>
-            <div className="button button--outline button--add">
+            <div className="button button--outline button--add" onClick={AddGoods}>
               <svg
                 width="12"
                 height="12"
@@ -61,8 +67,8 @@ const Pizza = ({ pizza }) => {
                   fill="white"
                 />
               </svg>
-              <span>Добавить</span>
-              <i>2</i>
+              <span >Добавить</span>
+              <i>{Goods}</i>
             </div>
           </div>
         </div>
