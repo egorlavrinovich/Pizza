@@ -3,7 +3,7 @@ import Header from "./components/header/header";
 import Panel from "./components/SortPanel/Panel/Panel";
 import Pizza from "./components/Pizza-block/PizzaItem/Pizza";
 import { useEffect, useMemo, useState } from "react";
-
+import { UseSortedPosts } from './hooks/Filter';
 function App() {
   const [posts, setposts] = useState([
     {
@@ -114,24 +114,7 @@ function App() {
   ]);
   const [SearchItem,SetSearchItem] = useState("")
   const [SearchCategory,SetSearchCategory] = useState("")
-  const SortedPosts = useMemo(()=>{
-    if (SearchItem) {
-    if (SearchItem === "price") {
-      return([...posts.sort((a, b) => a[SearchItem] - b[SearchItem])]);
-    } else {
-      return([...posts.sort((a, b) => b[SearchItem] - a[SearchItem])]); // ??? Допилить
-    }
-  }return posts
-},[posts,SearchItem])
-  const ChoosedCategory = useMemo(()=>{
-    if (SearchCategory) {
-          if (SearchCategory == "all") {
-            return posts
-          } else {
-            return([...posts.filter((items) => items[SearchCategory] == true)]);
-          }
-        }return posts
-  },[posts,SortedPosts,SearchCategory])
+  const SortedPosts = UseSortedPosts(SearchCategory,SearchItem,posts) // Кастомный хук сортировки
 
   return (
     <div className="wrapper">
@@ -141,7 +124,7 @@ function App() {
           <Panel sort={SetSearchItem} categories={SetSearchCategory} ></Panel>
           <h2 className="content__title">Все пиццы</h2>
           <div className="content__items">
-            <Pizza pizza={ChoosedCategory} />
+            <Pizza pizza={SortedPosts} />
           </div>
         </div>
       </div>
