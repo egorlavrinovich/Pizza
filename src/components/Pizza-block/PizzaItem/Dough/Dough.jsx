@@ -2,22 +2,22 @@ import React from 'react';
 import { useState } from 'react';
 import classNames from "classnames";
 
-
-const Dough = () => {
-  const [state, setstate] = useState({ dough: "традиционное", length: 26 });
+const Dough = ({AddDough}) => {
+  const [State, SetState] = useState({ dough: "традиционное"});
   const typeNames = ["тонкое", "традиционное"];
-  function AddDough(param) {
-    setstate({ ...state, dough: param });
+  function Dough(param) {
+    SetState({...State,dough:param});
+    AddDough(State)
   }
     return (
         <div>
             <ul>
               {typeNames.map((item, index) => (
                 <li
-                  onClick={() => AddDough(item)}
+                  onClick={() => Dough(item)}
                   key={index}
                   className={classNames("", {
-                    active: state.dough === item,
+                    active: State.dough === item,
                   })}
                 >
                   {item}

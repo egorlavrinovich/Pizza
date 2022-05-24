@@ -3,11 +3,12 @@ import classNames from "classnames";
 import { useState } from "react";
 
 
-const Length = () => {
-    const [state, setstate] = useState({ dough: "традиционное", length: 26 });
+const Length = ({AddLength}) => {
+    const [State, setstate] = useState({length: 26 });
     const sizes = [26, 30, 40];
-    function AddLength(params) {
-        setstate({ ...state, length: params });
+    function addLength(params) {
+        setstate({ ...State, length: params });
+        AddLength(null,State)
       }
     return (
         <div>
@@ -16,9 +17,9 @@ const Length = () => {
                 <li
                   key={index}
                   className={classNames("", {
-                    active: state.length === item,
+                    active: State.length === item,
                   })}
-                  onClick={() => AddLength(item)}
+                  onClick={() => addLength(item)}
                 >
                   {`${item} см`}
                 </li>
