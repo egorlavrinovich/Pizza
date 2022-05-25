@@ -1,15 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import classNames from "classnames";
 import { useState } from "react";
 
 
-const Length = ({AddLength}) => {
+const Length = React.memo(({AddLength}) => {
     const [State, setstate] = useState({length: 26 });
     const sizes = [26, 30, 40];
     function addLength(params) {
         setstate({ ...State, length: params });
-        AddLength(null,State)
       }
+      useEffect(()=>{AddLength(State)},[State])
     return (
         <div>
             <ul>
@@ -27,6 +27,6 @@ const Length = ({AddLength}) => {
             </ul>
         </div>
     );
-};
+});
 
 export default Length;

@@ -1,14 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import classNames from "classnames";
 
-const Dough = ({AddDough}) => {
+const Dough = React.memo(({AddDough}) => {
   const [State, SetState] = useState({ dough: "традиционное"});
   const typeNames = ["тонкое", "традиционное"];
   function Dough(param) {
     SetState({...State,dough:param});
-    AddDough(State)
   }
+  useEffect(()=>{AddDough(State,null)},[State])
     return (
         <div>
             <ul>
@@ -26,6 +26,6 @@ const Dough = ({AddDough}) => {
             </ul>
         </div>
     );
-};
+});
 
 export default Dough;

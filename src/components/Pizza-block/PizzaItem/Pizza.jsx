@@ -1,16 +1,19 @@
-import React from "react";
+import React, { useEffect, useMemo } from "react";
 import { useState } from "react";
 import Button from '../../button/button';
 import Dough from './Dough/Dough';
 import Length from './Length/Length';
 
-const Pizza = ({ pizza }) => {
+const Pizza = React.memo(({ pizza }) => {
   const [state, setstate] = useState({ dough: "традиционное", length: 26 });
-  const [Goods,SetGoods] = useState("")
-  function AddParams(dough,length) {
-    setstate({...state,dough:dough,length:length}) // Посмотреть функцию, она работает с запозданием
+  const [Goods,SetGoods] = useState()
+  function AddProperty(item) {
+    setstate({...state,...item})
   }
-  console.log(state)
+  function AddGood(item) {
+    SetGoods({...item,...state})
+  }
+  console.log(Goods)
   return (
     <>
       {pizza.map((item, id) => (
@@ -18,12 +21,12 @@ const Pizza = ({ pizza }) => {
           <img className="pizza-block__image" src={item.url} alt="Pizza" />
           <h4 className="pizza-block__title">{item.name}</h4>
           <div className="pizza-block__selector">
-            <Dough AddDough={AddParams}/>
-            <Length AddLength={AddParams}/>
+            <Dough AddDough={AddProperty}/>
+            <Length AddLength={AddProperty}/>
           </div>
           <div className="pizza-block__bottom">
             <div className="pizza-block__price">{item.price}</div>
-            <div onClick={()=>SetGoods({item})}>
+            <div onClick={()=>AddGood(item)}>
             <Button add/>
             </div>
           </div>
@@ -31,6 +34,6 @@ const Pizza = ({ pizza }) => {
       ))}
     </>
   );
-};
+});
 
 export default Pizza;
