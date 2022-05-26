@@ -12,7 +12,7 @@ const PopularPosts = (SearchItem,posts) => {
 return SortedPosts
 };
 
-export const UseSortedPosts = (SearchCategory="all",SearchItem,posts) => { // Посмотреть есть нюанс если НЕ кликаешься на Всё, то не работает сортировка по популярности
+export const UseSortedPosts = (SearchCategory="all",SearchItem,posts) => { 
   const result = PopularPosts(SearchItem,posts)
     const ChoosedCategory = useMemo(()=>{
     if (SearchCategory) {
@@ -21,7 +21,7 @@ export const UseSortedPosts = (SearchCategory="all",SearchItem,posts) => { // П
           } else {
             return([...posts.filter((items) => items[SearchCategory] == true)]);
           }
-        }return posts
+        }return result
   },[result,SearchCategory,SearchItem])
   return ChoosedCategory
 }
