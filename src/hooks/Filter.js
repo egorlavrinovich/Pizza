@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 const PopularPosts = (SearchItem,posts) => {
     const SortedPosts = useMemo(()=>{
     if (SearchItem) {
@@ -12,16 +12,16 @@ const PopularPosts = (SearchItem,posts) => {
 return SortedPosts
 };
 
-export const UseSortedPosts = (SearchCategory,SearchItem,posts) => {
+export const UseSortedPosts = (SearchCategory,SearchItem,posts) => { // Посмотреть есть нюанс если НЕ кликаешься на Всё, то не работает сортировка по популярности
     const result = PopularPosts(SearchItem,posts)
-const ChoosedCategory = useMemo(()=>{
-    if (SearchCategory) {
+    const ChoosedCategory = useMemo(()=>{
+    if (SearchCategory||SearchItem) {
           if (SearchCategory == "all") {
-            return posts
+            return result
           } else {
             return([...posts.filter((items) => items[SearchCategory] == true)]);
           }
         }return posts
-  },[result,SearchCategory])
+  },[result,SearchCategory,SearchItem])
   return ChoosedCategory
 }

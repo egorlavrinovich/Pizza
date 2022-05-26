@@ -11,7 +11,7 @@ const SortTaste = ({ Categories }) => {
     "С ананасами",
     "Акции%",
   ];
-  const [active, setactive] = useState("");
+  const [active, setactive] = useState("Все");
   function ChooseItem(item) {
     setactive(item);
     const result = (item) => {

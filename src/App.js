@@ -5,6 +5,7 @@ import Pizza from "./components/Pizza-block/PizzaItem/Pizza";
 import { useEffect, useMemo, useState } from "react";
 import { UseSortedPosts } from './hooks/Filter';
 import { fetchposts } from './API/fetchposts';
+import Loader from './components/UI/Loader/Loader';
 function App() {
   const [posts, setposts] = useState([
   ]);
@@ -25,7 +26,7 @@ function App() {
           <Panel sort={SetSearchItem} categories={SetSearchCategory} ></Panel>
           <h2 className="content__title">Все пиццы</h2>
           <div className="content__items">
-            <Pizza pizza={SortedPosts} />
+            {posts.length&&<Pizza pizza={SortedPosts}/>||<Loader/>}
           </div>
         </div>
       </div>
