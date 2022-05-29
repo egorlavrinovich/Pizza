@@ -2,15 +2,17 @@ import { useEffect, useMemo } from "react";
 const PopularPosts = (SearchItem, posts) => {
   const SortedPosts = useMemo(() => {
     if (SearchItem) {
-      if (SearchItem == "price") {
-        return [...posts.sort((a, b) => a[SearchItem] - b[SearchItem])];
-      } else if (SearchItem == "popular") {
-        return [...posts.sort((a, b) => b[SearchItem] - a[SearchItem])];
-      } else if (SearchItem == "name") {
-        console.log(1);
-        return [...posts].sort((a, b) =>
-          a[SearchItem].localeCompare(b[SearchItem])
-        );
+      switch (SearchItem) {
+        case "price":
+          return [...posts.sort((a, b) => a[SearchItem] - b[SearchItem])];
+        case "popular":
+          return [...posts.sort((a, b) => b[SearchItem] - a[SearchItem])];
+        case "name":
+          return [...posts].sort((a, b) =>
+            a[SearchItem].localeCompare(b[SearchItem])
+          );
+        default:
+          return posts;
       }
     }
     return posts;
