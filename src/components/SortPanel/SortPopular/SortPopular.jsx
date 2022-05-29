@@ -11,6 +11,7 @@ const SortPopular = ({ sort }) => {
       const obj = {
         цене: "price",
         популярности: "popular",
+        "": "name",
       };
       return obj[item];
     };
@@ -31,7 +32,14 @@ const SortPopular = ({ sort }) => {
             fill="#2C2C2C"
           />
         </svg>
-        <b onMouseEnter={() => setvisible(true)}>Сортировка по:</b>
+        <b
+          onMouseEnter={() => setvisible(true)}
+          onClick={() => {
+            ChooseProperty("");
+          }}
+        >
+          Сортировка по:
+        </b>
         <span>{property}</span>
       </div>
       <div

@@ -8,8 +8,14 @@ import { fetchposts } from "./API/fetchposts";
 import Loader from "./components/UI/Loader/Loader";
 import { Fetch } from "./hooks/RequestHandling";
 import errorimage from "./assets/img/Error.gif";
+import { useSelector, useDispatch } from "react-redux";
+import Button from "./components/button/button";
+import { filterPopular, filterCategory } from "./redux/Slice/FilterSlice";
 function App() {
   const [posts, setposts] = useState([]);
+  const dispatch = useDispatch();
+  const SearchItem = useSelector((state) => state.filter.popular); // Redux popular filter
+  const Searchcategory = useSelector((state) => state.filter.category); // Redux category filter
   const [getItems, load, error] = Fetch(async function getPosts() {
     const items = await fetchposts();
     setposts(items);
@@ -17,16 +23,19 @@ function App() {
   useEffect(() => {
     getItems();
   }, []);
-  console.log(load);
-  const [SearchItem, SetSearchItem] = useState(""); // Сортировка: Цена, популярность
-  const [SearchCategory, SetSearchCategory] = useState(""); // Категории
-  const SortedPosts = UseSortedPosts(SearchCategory, SearchItem, posts); // Кастомный хук сортировки
+  const SortedPosts = UseSortedPosts(Searchcategory, SearchItem, posts); // Кастомный хук сортировки
+  function SetSearchItem(item) {
+    dispatch(filterPopular(item));
+  }
+  function SetCategory(item) {
+    dispatch(filterCategory(item));
+  }
   return (
     <div className="wrapper">
       <Header></Header>
       <div className="content">
         <div className="container">
-          <Panel sort={SetSearchItem} categories={SetSearchCategory}></Panel>
+          <Panel sort={SetSearchItem} categories={SetCategory}></Panel>
           <h2 className="content__title">Все пиццы</h2>
           <div className="content__items">
             {!error ? (
