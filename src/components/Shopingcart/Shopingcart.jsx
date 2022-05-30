@@ -1,10 +1,12 @@
 import React from "react";
-
-const Shopingcart = ({ totalSum = 0, CountGoods = 0 }) => {
+import { useSelector, useDispatch } from "react-redux";
+const Shopingcart = () => {
+  const TotalSum = useSelector((state) => state.shopcart.price); // отображаем стоимость товара
+  const TotalCountGoods = useSelector((state) => state.shopcart.count); // отображаем количество товара
   return (
     <div className="header__cart">
       <a href="/cart.html" className="button button--cart">
-        <span>{`${totalSum} ₽`}</span>
+        <span>{`${TotalSum} ₽`}</span>
         <div className="button__delimiter"></div>
         <svg
           width="18"
@@ -35,7 +37,7 @@ const Shopingcart = ({ totalSum = 0, CountGoods = 0 }) => {
             strokeLinejoin="round"
           />
         </svg>
-        <span>{CountGoods}</span>
+        <span>{TotalCountGoods}</span>
       </a>
     </div>
   );
