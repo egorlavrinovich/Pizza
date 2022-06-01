@@ -19,10 +19,11 @@ const Pizza = React.memo(({ pizza }) => {
     dispatch(Price(item.price));
     dispatch(Count());
     SetGoods({ ...item, ...state });
+    dispatch(AddPizza(Goods));
   }
-  useEffect(() => {
-    dispatch(AddPizza(Goods)); // ??? Возможно ошибка, в массив залетатет undefind
-  }, [Goods]);
+  // useEffect(() => {
+  //   dispatch(AddPizza(Goods)); // ??? Возможно ошибка, в массив залетатет undefind
+  // }, [Goods]);
   console.log(AvailablePizza);
   return (
     <>
