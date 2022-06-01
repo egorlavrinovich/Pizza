@@ -1,16 +1,16 @@
-import "./scss/app.scss";
-import Header from "./components/header/header";
-import Panel from "./components/SortPanel/Panel/Panel";
-import Pizza from "./components/Pizza-block/PizzaItem/Pizza";
+import "../scss/app.scss";
+import Header from "../components/header/header";
+import Panel from "../components/SortPanel/Panel/Panel";
+import Pizza from "../components/Pizza-block/PizzaItem/Pizza";
 import { useEffect, useMemo, useState } from "react";
-import { UseSortedPosts } from "./hooks/Filter";
-import { fetchposts } from "./API/fetchposts";
-import Loader from "./components/UI/Loader/Loader";
-import { Fetch } from "./hooks/RequestHandling";
-import errorimage from "./assets/img/Error.gif";
+import { UseSortedPosts } from "../hooks/Filter";
+import { fetchposts } from "../API/fetchposts";
+import Loader from "../components/UI/Loader/Loader";
+import { Fetch } from "../hooks/RequestHandling";
+import errorimage from "../assets/img/Error.gif";
 import { useSelector, useDispatch } from "react-redux";
-import Button from "./components/button/button";
-import { filterPopular, filterCategory } from "./redux/Slice/FilterSlice";
+import Button from "../components/button/button";
+import { filterPopular, filterCategory } from "../redux/Slice/FilterSlice";
 function App() {
   const [posts, setposts] = useState([]);
   const dispatch = useDispatch();
