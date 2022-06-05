@@ -3,16 +3,18 @@ import Header from "../components/header/header";
 import { useSelector, useDispatch } from "react-redux";
 import "../scss/app.scss";
 import Svg from "../components/UI/svg/svg";
+import { AddPizza, DeletePizza } from "../redux/Slice/Price";
 const ShoppingCart = () => {
   const OrderedPizzes = useSelector((state) => state.shopcart.pizzas);
+  const dispatch = useDispatch();
   return (
     <div className="wrapper">
       <Header />
       <div className="shoppingcart">
         {OrderedPizzes.length && // подправить key
-          OrderedPizzes.map((item) => (
-            <ul>
-              <li key={item.id}>
+          OrderedPizzes.map((item, index) => (
+            <ul key={index}>
+              <li>
                 <img src={item.url} />
                 <div className="order">
                   <span className="title">{`Пицца: ${item.name}`}</span>
@@ -26,7 +28,7 @@ const ShoppingCart = () => {
                   <div className="shoppricemobile">
                     {`Цена: ${item.price} ₽`}
                     <div className="counter">
-                      <div className="plus">
+                      <div className="minus">
                         <Svg svg="minus" />
                       </div>
                       <div className="count">1</div>
@@ -42,15 +44,21 @@ const ShoppingCart = () => {
                 <div className="shopprice">
                   {`Цена: ${item.price} ₽`}
                   <div className="counter">
-                    <div className="plus">
+                    <div className="minus">
                       <Svg svg="minus" />
                     </div>
                     <div className="count">1</div>
-                    <div className="plus">
+                    <div
+                      className="plus"
+                      onClick={() => dispatch(AddPizza(item))}
+                    >
                       <Svg svg="plus" />
                     </div>
                   </div>
-                  <div className="trash">
+                  <div
+                    className="trash"
+                    onClick={() => dispatch(DeletePizza(item))}
+                  >
                     <Svg svg="trash" />
                   </div>
                 </div>

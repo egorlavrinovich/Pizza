@@ -4,7 +4,7 @@ import Button from "../../button/button";
 import Dough from "./Dough/Dough";
 import Length from "./Length/Length";
 import { useSelector, useDispatch } from "react-redux";
-import { Price, Count, AddPizza } from "../../../redux/Slice/Price";
+import { AddPizza } from "../../../redux/Slice/Price";
 
 const Pizza = React.memo(({ pizza }) => {
   const [state, setstate] = useState({ dough: "традиционное", length: 26 });
@@ -15,8 +15,6 @@ const Pizza = React.memo(({ pizza }) => {
   }
   function AddGood(item) {
     // Добавляем с помощью диспатча кол-во товара в корзину, отправляем данные на store
-    dispatch(Price(item.price));
-    dispatch(Count());
     dispatch(AddPizza({ ...item, ...state }));
   }
   console.log(AvailablePizza);

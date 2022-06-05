@@ -10,16 +10,18 @@ export const ShoppingCart = createSlice({
   name: "shopcart",
   initialState,
   reducers: {
-    Price(state, action) {
-      state.price += action.payload;
-    },
-    Count(state, action) {
-      state.count += 1;
-    },
     AddPizza(state, action) {
       state.pizzas.push(action.payload);
+      state.price += action.payload.price;
+      state.count += 1;
+    },
+    DeletePizza(state, action) {
+      console.log(action.payload);
+      state.pizzas = state.pizzas.filter(
+        (item) => JSON.stringify(item) !== JSON.stringify(action.payload)
+      );
     },
   },
 });
-export const { Price, Count, AddPizza } = ShoppingCart.actions;
+export const { AddPizza, DeletePizza } = ShoppingCart.actions;
 export default ShoppingCart.reducer;
