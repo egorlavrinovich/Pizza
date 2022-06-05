@@ -3,12 +3,11 @@ import Header from "../components/header/header";
 import { useSelector, useDispatch } from "react-redux";
 import "../scss/app.scss";
 import Svg from "../components/UI/svg/svg";
-import { AddPizza, DeletePizza } from "../redux/Slice/Price";
+import { AddPizza, DeletePizza, ReducePizza } from "../redux/Slice/Price";
 const ShoppingCart = () => {
   const OrderedPizzes = useSelector((state) => state.shopcart.pizzas);
   const dispatch = useDispatch();
-  const AvailablePie = useSelector((state) => state.shopcart.counterPizzes);
-  console.log(AvailablePie);
+  const AvailablePiezzes = useSelector((state) => state.shopcart.counterPizzes);
   return (
     <div className="wrapper">
       <Header />
@@ -46,10 +45,13 @@ const ShoppingCart = () => {
                 <div className="shopprice">
                   {`Цена: ${item.price} ₽`}
                   <div className="counter">
-                    <div className="minus">
+                    <div
+                      className="minus"
+                      onClick={() => dispatch(ReducePizza(item.id))}
+                    >
                       <Svg svg="minus" />
                     </div>
-                    <div className="count">1</div>
+                    <div className="count">{AvailablePiezzes[item.id]}</div>
                     <div
                       className="plus"
                       onClick={() => dispatch(AddPizza(item))}

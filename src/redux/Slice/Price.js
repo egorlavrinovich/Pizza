@@ -36,7 +36,12 @@ export const ShoppingCart = createSlice({
         (item) => JSON.stringify(item) !== JSON.stringify(action.payload)
       );
     },
+    ReducePizza(state, action) {
+      if (state.counterPizzes[action.payload] > 1) {
+        state.counterPizzes[action.payload] -= 1;
+      }
+    },
   },
 });
-export const { AddPizza, DeletePizza } = ShoppingCart.actions;
+export const { AddPizza, DeletePizza, ReducePizza } = ShoppingCart.actions;
 export default ShoppingCart.reducer;
