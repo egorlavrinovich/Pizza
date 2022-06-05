@@ -1,0 +1,11 @@
+.counter {
+    margin: 4% 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    .plus {
+        svg:hover {
+            fill: $orange;
+        }
+    }
+}

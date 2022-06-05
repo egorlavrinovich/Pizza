@@ -22,21 +22,33 @@ const ShoppingCart = () => {
                   <span>{`Наличие грибов: ${
                     item.mashrooms ? "да" : "нет"
                   }`}</span>
-                  <span>{`Отсрая: ${item.peperoni ? "да" : "нет"}`}</span>
+                  <span>{`Острая: ${item.peperoni ? "да" : "нет"}`}</span>
                   <div className="shoppricemobile">
                     {`Цена: ${item.price} ₽`}
-                    <div className="counter">+</div>
-                    <div className="trash">
-                      <Svg svg="trash" />
+                    <div className="counter">
+                      <div className="plus">
+                        <Svg svg="minus" />
+                      </div>
+                      <div className="count">1</div>
+                      <div className="plus">
+                        <Svg svg="plus" />
+                      </div>
+                      <div className="trash">
+                        <Svg svg="trash" />
+                      </div>
                     </div>
                   </div>
                 </div>
                 <div className="shopprice">
                   {`Цена: ${item.price} ₽`}
                   <div className="counter">
-                    <Svg svg="minus" />
-                    {}
-                    <Svg svg="plus" />
+                    <div className="plus">
+                      <Svg svg="minus" />
+                    </div>
+                    <div className="count">1</div>
+                    <div className="plus">
+                      <Svg svg="plus" />
+                    </div>
                   </div>
                   <div className="trash">
                     <Svg svg="trash" />
