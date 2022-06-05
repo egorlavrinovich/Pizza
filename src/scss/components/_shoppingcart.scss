@@ -1,43 +1,47 @@
-.wrapper {
-    width: 100%;
+@mixin fonttitle($weight, $size) {
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+    font-size: $size;
+    font-weight: $weight;
+    text-decoration: underline;
+}
 
+.wrapper {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    flex-grow: 1;
     .shoppingcart {
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        align-items: center;
-        height: auto;
-        width: inherit;
         ul {
-            width: 80vw;
+            display: flex;
+            justify-content: center;
             li {
+                img {
+                    min-height: 15vw;
+                    min-width: 15vw;
+                }
+                min-width: 85%;
                 cursor: pointer;
                 background-color: rgba($color: $background, $alpha: 0.2);
                 display: flex;
-                flex-wrap: wrap;
                 justify-content: space-around;
+                flex-direction: row;
                 align-items: center;
                 margin-top: 2vw;
                 border-radius: 35px;
                 max-width: 70vw;
-                flex-grow: 1;
                 img {
                     max-height: 15vw;
                 }
             }
-            span:nth-child(1) {
-                font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
-                font-size: x-large;
-                font-weight: 500;
-                text-decoration: underline;
+            .title {
+                @include fonttitle(500, x-large);
             }
             li:hover {
                 background-color: rgba($color: $background, $alpha: 0.5);
             }
             .shopprice {
-                font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
-                font-size: large;
-                font-weight: 500;
+                @include fonttitle(500, large);
+                text-decoration: none;
             }
             .actionpart {
                 display: flex;
@@ -53,9 +57,37 @@
                 }
             }
         }
+        .shoppricemobile {
+            display: none;
+        }
         .order {
             display: flex;
             flex-direction: column;
+        }
+        @media screen and (max-width: 500px) {
+            ul {
+                display: flex;
+                justify-content: column;
+                align-items: center;
+                li {
+                    img {
+                        min-height: 45vw;
+                        min-width: 45vw;
+                    }
+                    min-height: 50vw;
+                    @include fonttitle(400, medium);
+                    text-decoration: none;
+                    display: flex;
+                    flex-direction: column;
+                    flex-grow: 1;
+                }
+                .shopprice {
+                    display: none;
+                }
+                .shoppricemobile {
+                    display: block;
+                }
+            }
         }
     }
 }
