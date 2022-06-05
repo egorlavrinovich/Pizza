@@ -7,11 +7,13 @@ import { AddPizza, DeletePizza } from "../redux/Slice/Price";
 const ShoppingCart = () => {
   const OrderedPizzes = useSelector((state) => state.shopcart.pizzas);
   const dispatch = useDispatch();
+  const AvailablePie = useSelector((state) => state.shopcart.counterPizzes);
+  console.log(AvailablePie);
   return (
     <div className="wrapper">
       <Header />
       <div className="shoppingcart">
-        {OrderedPizzes.length && // подправить key
+        {OrderedPizzes.length &&
           OrderedPizzes.map((item, index) => (
             <ul key={index}>
               <li>

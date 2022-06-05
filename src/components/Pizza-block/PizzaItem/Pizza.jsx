@@ -8,7 +8,6 @@ import { AddPizza } from "../../../redux/Slice/Price";
 
 const Pizza = React.memo(({ pizza }) => {
   const [state, setstate] = useState({ dough: "традиционное", length: 26 });
-  const AvailablePizza = useSelector((state) => state.shopcart.pizzas);
   const dispatch = useDispatch();
   function AddProperty(item) {
     setstate({ ...state, ...item });
@@ -17,7 +16,6 @@ const Pizza = React.memo(({ pizza }) => {
     // Добавляем с помощью диспатча кол-во товара в корзину, отправляем данные на store
     dispatch(AddPizza({ ...item, ...state }));
   }
-  console.log(AvailablePizza);
   return (
     <>
       {pizza.map((item, id) => (
