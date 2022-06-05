@@ -39,6 +39,7 @@ export const ShoppingCart = createSlice({
     ReducePizza(state, action) {
       if (state.counterPizzes[action.payload] > 1) {
         state.counterPizzes[action.payload] -= 1;
+        state.count -= 1;
       }
     },
   },

@@ -3,11 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import Svg from "../UI/svg/svg";
 const Shopingcart = () => {
-  const ArrayPizzas = useSelector((state) => state.shopcart.pizzas); // отображаем стоимость товара
-  const TotalCountGoods = useSelector((state) => state.shopcart.pizzas); // отображаем количество товара
-  const TotalSum = ArrayPizzas.reduce(function (accumulator, currentValue) {
-    return accumulator + currentValue.price;
-  }, 0);
+  const TotalSum = useSelector((state) => state.shopcart.price); // отображаем стоимость товара
+  const TotalCountGoods = useSelector((state) => state.shopcart.count); // отображаем количество товара
   return (
     <Link to="shopcart">
       <div className="header__cart">
@@ -15,7 +12,7 @@ const Shopingcart = () => {
           <span>{`${TotalSum || 0} ₽`}</span>
           <div className="button__delimiter"></div>
           <Svg svg={"shopcart"} />
-          <span>{TotalCountGoods.length}</span>
+          <span>{TotalCountGoods}</span>
         </div>
       </div>
     </Link>

@@ -21,7 +21,6 @@ const PopularPosts = (SearchItem, posts) => {
 };
 
 export const UseSortedPosts = (SearchCategory = "all", SearchItem, posts) => {
-  console.log(SearchItem);
   const result = PopularPosts(SearchItem, posts);
   const ChoosedCategory = useMemo(() => {
     if (SearchCategory) {
