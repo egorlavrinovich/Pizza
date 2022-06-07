@@ -1,5 +1,5 @@
 import React from "react";
-import { createSlice } from "@reduxjs/toolkit/";
+import { createSlice, current } from "@reduxjs/toolkit/";
 import { useEffect, useMemo, useState } from "react";
 
 const initialState = {
@@ -31,15 +31,19 @@ export const ShoppingCart = createSlice({
       state.count += 1;
     },
     DeletePizza(state, action) {
+      const count = state.counterPizzes[action.payload.id]; // Обязательно записываем наш стейт в переменную
+      state.count -= count;
+      state.price -= +count * +action.payload.price;
       delete state.counterPizzes[action.payload.id];
       state.pizzas = state.pizzas.filter(
         (item) => JSON.stringify(item) !== JSON.stringify(action.payload)
       );
     },
     ReducePizza(state, action) {
-      if (state.counterPizzes[action.payload] > 1) {
-        state.counterPizzes[action.payload] -= 1;
+      if (state.counterPizzes[action.payload.id] > 1) {
+        state.counterPizzes[action.payload.id] -= 1;
         state.count -= 1;
+        state.price -= action.payload.price;
       }
     },
   },

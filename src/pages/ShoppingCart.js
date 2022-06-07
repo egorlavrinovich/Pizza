@@ -47,7 +47,7 @@ const ShoppingCart = () => {
                   <div className="counter">
                     <div
                       className="minus"
-                      onClick={() => dispatch(ReducePizza(item.id))}
+                      onClick={() => dispatch(ReducePizza(item))}
                     >
                       <Svg svg="minus" />
                     </div>
