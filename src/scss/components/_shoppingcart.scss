@@ -10,6 +10,37 @@
     flex-direction: column;
     flex-grow: 1;
     .shoppingcart {
+        .emptycart {
+            display: flex;
+            align-items: center;
+            font-family: inherit;
+            font-size: large;
+            img {
+                min-width: 50vw;
+            }
+            h4 {
+                margin-bottom: 10vw;
+                margin-left: 10vw;
+            }
+            .PS {
+                color: #7b7b7b;
+                font-family: "Proxima Nova", Roboto, system-ui, Tahoma, sans-serif;
+                font-size: medium;
+            }
+            .button {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin: 3vw 0;
+            }
+            &:nth-child(1) {
+                display: flex;
+                align-items: flex-end;
+                &:nth-child(3) {
+                    background-color: black;
+                }
+            }
+        }
         ul {
             display: flex;
             justify-content: center;
