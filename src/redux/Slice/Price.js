@@ -14,34 +14,39 @@ export const ShoppingCart = createSlice({
   initialState,
   reducers: {
     AddPizza(state, action) {
-      const valueconsist = state.pizzas.filter(
-        (item) => JSON.stringify(action.payload) === JSON.stringify(item)
-      );
-      if (valueconsist.length) {
-        if (state.counterPizzes[action.payload.id]) {
-          state.counterPizzes[action.payload.id] += 1;
-        } else {
-          state.counterPizzes[action.payload.id] = 2;
+      function findElem(obj) {
+        const result = state.pizzas.filter(
+          (item) =>
+            item.url == obj.url &&
+            item.dough == obj.dough &&
+            item.length == obj.length
+        );
+        if (result.length) {
+          result[0].count += 1;
+          return false;
         }
+        return result;
       }
-      if (!state.counterPizzes[action.payload.id]) {
-        state.pizzas.push(action.payload);
-      }
+      if (findElem(action.payload))
+        state.pizzas.push({
+          ShopcartId: Date.now(),
+          ...action.payload,
+          count: 1,
+        });
       state.price += action.payload.price;
       state.count += 1;
     },
     DeletePizza(state, action) {
-      const count = state.counterPizzes[action.payload.id]; // Обязательно записываем наш стейт в переменную
-      state.count -= count;
-      state.price -= +count * +action.payload.price;
-      delete state.counterPizzes[action.payload.id];
+      const findobj = state.pizzas[action.payload.index]; // Обязательно записываем наш стейт в переменную
       state.pizzas = state.pizzas.filter(
-        (item) => JSON.stringify(item) !== JSON.stringify(action.payload)
+        (item, index) => index !== action.payload.index
       );
+      state.count -= findobj.count;
+      state.price -= +findobj.count * +action.payload.price;
     },
     ReducePizza(state, action) {
-      if (state.counterPizzes[action.payload.id] > 1) {
-        state.counterPizzes[action.payload.id] -= 1;
+      if (state.pizzas[action.payload.index].count > 1) {
+        state.pizzas[action.payload.index].count -= 1;
         state.count -= 1;
         state.price -= action.payload.price;
       }
