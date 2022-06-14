@@ -4,7 +4,7 @@ import Button from "../../button/button";
 import Dough from "./Dough/Dough";
 import Length from "./Length/Length";
 import { useSelector, useDispatch } from "react-redux";
-import { AddPizza } from "../../../redux/Slice/Price";
+import { AddPizza } from "../../../redux/Slice/PriceSlice";
 
 const Pizza = React.memo(({ pizza }) => {
   const [state, setstate] = useState({ dough: "традиционное", length: 26 });

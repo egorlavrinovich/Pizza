@@ -2,7 +2,11 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Svg from "../../UI/svg/svg";
 
-import { AddPizza, DeletePizza, ReducePizza } from "../../../redux/Slice/Price";
+import {
+  AddPizza,
+  DeletePizza,
+  ReducePizza,
+} from "../../../redux/Slice/PriceSlice";
 
 const PizzaShopCartItem = ({ index, item }) => {
   const dispatch = useDispatch();

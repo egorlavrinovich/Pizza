@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import PizzaShopCartItem from "./PizzaShopcartItem.jsx/PizzaShopCartItem";
 import EmptyShopCart from "../../assets/img/EmptyShopCart.jpg";
-
 const PizzaShopcart = () => {
   const OrderedPizzes = useSelector((state) => state.shopcart.pizzas);
   return (
