@@ -13,15 +13,13 @@ import Button from "../components/button/button";
 import { filterPopular, filterCategory } from "../redux/Slice/FilterSlice";
 import { getAllPizzes, fetchUserById } from "../redux/Slice/AllPizzasSlice";
 function App() {
-  const post = useSelector((state) => state.posts.Pizzes);
-  console.log(post);
-  const [posts, setposts] = useState([]);
+  const posts = useSelector((state) => state.posts.Pizzes);
+
   const dispatch = useDispatch();
   const SearchItem = useSelector((state) => state.filter.popular); // Redux popular filter
   const Searchcategory = useSelector((state) => state.filter.category); // Redux category filter
   const [getItems, load, error] = Fetch(async function getPosts() {
     const items = await fetchposts();
-    setposts(items);
   });
   useEffect(() => {
     getItems();

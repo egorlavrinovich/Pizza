@@ -21,9 +21,8 @@ export const AllPizzas = createSlice({
   name: "allpizzas",
   initialState,
   reducers: {
-    getAllPizzes(state, action) {
-      state.Pizzes.push(fetchUserById);
-      console.log(fetchUserById);
+    changepizza(state, action) {
+      state.Pizzes=[...action.payload];
     },
   },
   extraReducers: {
@@ -31,13 +30,13 @@ export const AllPizzas = createSlice({
       console.log(state);
     },
     [fetchUserById.fulfilled]: (state, action) => {
-      state.Pizzes.push(action.payload);
+      state.Pizzes=[...action.payload];
     },
     [fetchUserById.rejected]: (state, action) => {
       console.log(state);
     },
   },
 });
-export const { getAllPizzes } = AllPizzas.actions;
+export const { getAllPizzes,changepizza } = AllPizzas.actions;
 
 export default AllPizzas.reducer;
