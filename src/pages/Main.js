@@ -11,7 +11,10 @@ import errorimage from "../assets/img/Error.gif";
 import { useSelector, useDispatch } from "react-redux";
 import Button from "../components/button/button";
 import { filterPopular, filterCategory } from "../redux/Slice/FilterSlice";
+import { getAllPizzes, fetchUserById } from "../redux/Slice/AllPizzasSlice";
 function App() {
+  const post = useSelector((state) => state.posts.Pizzes);
+  console.log(post);
   const [posts, setposts] = useState([]);
   const dispatch = useDispatch();
   const SearchItem = useSelector((state) => state.filter.popular); // Redux popular filter
@@ -22,6 +25,7 @@ function App() {
   });
   useEffect(() => {
     getItems();
+    dispatch(fetchUserById());
   }, []);
   const SortedPosts = UseSortedPosts(Searchcategory, SearchItem, posts); // Кастомный хук сортировки
   function SetSearchItem(item) {
