@@ -8,9 +8,7 @@ const PopularPosts = (SearchItem, posts) => {
         case "popular":
           return [...posts.sort((a, b) => b[SearchItem] - a[SearchItem])];
         case "name":
-          return [...posts].sort((a, b) =>
-            a[SearchItem].localeCompare(b[SearchItem])
-          );
+          return posts;
         default:
           return posts;
       }
