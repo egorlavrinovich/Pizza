@@ -1,6 +1,6 @@
 import React from "react";
 import styl from "./input.module.scss";
-const Input = () => {
+const Input = ({ value, Change }) => {
   return (
     <div className={styl.root}>
       <svg
@@ -14,6 +14,7 @@ const Input = () => {
         </g>
       </svg>
       <svg
+        onClick={() => Change("")}
         className={styl.cross}
         xmlns="http://www.w3.org/2000/svg"
         width="24"
@@ -29,6 +30,8 @@ const Input = () => {
         <line x1="6" y1="6" x2="18" y2="18" />
       </svg>
       <input
+        value={value}
+        onChange={(e) => Change(e.target.value)}
         type="text"
         className={styl.input}
         placeholder="Введите название пиццы"

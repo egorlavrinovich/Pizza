@@ -3,12 +3,12 @@
 }
 
 .input {
-    width: 20vw;
-    height: 2vw;
+    width: 350px;
+    height: 35px;
     border: 1px solid gray;
     border-radius: 8px;
     font-size: large;
-    padding-left: 2vw;
+    padding-left: 35px;
     z-index: 1;
     &:focus {
         border: 2px solid black;
@@ -30,5 +30,28 @@
     &:hover {
         opacity: 1;
         cursor: pointer;
+    }
+}
+@media only screen and (max-width: 978px) {
+    .input {
+        width: 270px;
+    }
+}
+@media only screen and (max-width: 884px) {
+    .find,
+    .cross {
+        display: none;
+    }
+    .input {
+        padding-left: 5px;
+        width: 200px;
+        &::placeholder {
+            font-size: medium;
+        }
+    }
+}
+@media only screen and (max-width: 645px) {
+    .input {
+        display: none;
     }
 }

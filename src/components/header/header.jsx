@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "./pizza-logo.svg";
 import Shopingcart from "../Shopingcart/Shopingcart";
 import { Link } from "react-router-dom";
 import Input from "../UI/input/Input";
 const Header = () => {
+  const [state, setstate] = useState("");
+  console.log(state);
   return (
     <div>
       <div className="header">
@@ -17,7 +19,7 @@ const Header = () => {
               </div>
             </div>
           </Link>
-          <Input />
+          <Input value={state} Change={setstate} />
           <Shopingcart></Shopingcart>
         </div>
       </div>
