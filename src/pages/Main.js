@@ -13,8 +13,6 @@ import Button from "../components/button/button";
 import { filterPopular, filterCategory } from "../redux/Slice/FilterSlice";
 import { getAllPizzes, fetchUserById } from "../redux/Slice/AllPizzasSlice";
 function App() {
-  const post = useSelector((state) => state.posts.Pizzes);
-  console.log(post);
   const [posts, setposts] = useState([]);
   const dispatch = useDispatch();
   const SearchItem = useSelector((state) => state.filter.popular); // Redux popular filter
