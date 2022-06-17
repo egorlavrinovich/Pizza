@@ -17,6 +17,7 @@ function App() {
   const dispatch = useDispatch();
   const SearchItem = useSelector((state) => state.filter.popular); // Redux popular filter
   const Searchcategory = useSelector((state) => state.filter.category); // Redux category filter
+  const SearchSymbol = useSelector((state) => state.filter.symbol);
   const [getItems, load, error] = Fetch(async function getPosts() {
     const items = await fetchposts();
     setposts(items);
@@ -25,7 +26,12 @@ function App() {
     getItems();
     dispatch(fetchUserById());
   }, []);
-  const SortedPosts = UseSortedPosts(Searchcategory, SearchItem, posts); // Кастомный хук сортировки
+  const SortedPosts = UseSortedPosts(
+    Searchcategory,
+    SearchItem,
+    SearchSymbol,
+    posts
+  ); // Кастомный хук сортировки
   function SetSearchItem(item) {
     dispatch(filterPopular(item));
   }

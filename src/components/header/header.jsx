@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import logo from "./pizza-logo.svg";
 import Shopingcart from "../Shopingcart/Shopingcart";
 import { Link } from "react-router-dom";
 import Input from "../UI/input/Input";
+import { useDispatch } from "react-redux";
+import { filterSymbol } from "../../redux/Slice/FilterSlice";
 const Header = () => {
+  const dispatch = useDispatch();
   const [state, setstate] = useState("");
-  console.log(state);
+  const ValuesInput = useMemo(() => {
+    dispatch(filterSymbol(state));
+  }, [state]);
   return (
     <div>
       <div className="header">

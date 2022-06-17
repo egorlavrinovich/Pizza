@@ -20,7 +20,12 @@ const PopularPosts = (SearchItem, posts) => {
   return SortedPosts;
 };
 
-export const UseSortedPosts = (SearchCategory = "all", SearchItem, posts) => {
+export const UseSortedPosts = (
+  SearchCategory,
+  SearchItem,
+  SearchSymbol,
+  posts
+) => {
   const result = PopularPosts(SearchItem, posts);
   const ChoosedCategory = useMemo(() => {
     if (SearchCategory) {
