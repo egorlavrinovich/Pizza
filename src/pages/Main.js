@@ -17,10 +17,10 @@ function App() {
   const dispatch = useDispatch();
   const SearchItem = useSelector((state) => state.filter.popular); // Redux popular filter
   const Searchcategory = useSelector((state) => state.filter.category); // Redux category filter
-  const SearchSymbol = useSelector((state) => state.filter.symbol);
+  const SearchSymbol = useSelector((state) => state.filter.symbol); // Redux input filter
   const [getItems, load, error] = Fetch(async function getPosts() {
     const items = await fetchposts();
-    setposts(items);
+    setposts([...posts, ...items]);
   });
   useEffect(() => {
     getItems();

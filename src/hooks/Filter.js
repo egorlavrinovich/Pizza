@@ -38,7 +38,6 @@ export const UseSortedPosts = (
   posts
 ) => {
   const result2 = SearchPosts(PopularPosts(SearchItem, posts), SearchSymbol);
-  // const result2 = SearchPosts(result, SearchSymbol);
   const ChoosedCategory = useMemo(() => {
     if (SearchCategory) {
       if (SearchCategory == "all") {
