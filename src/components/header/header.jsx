@@ -2,6 +2,7 @@ import React from "react";
 import logo from "./pizza-logo.svg";
 import Shopingcart from "../Shopingcart/Shopingcart";
 import { Link } from "react-router-dom";
+import Input from "../UI/input/Input";
 const Header = () => {
   return (
     <div>
@@ -16,6 +17,7 @@ const Header = () => {
               </div>
             </div>
           </Link>
+          <Input />
           <Shopingcart></Shopingcart>
         </div>
       </div>
