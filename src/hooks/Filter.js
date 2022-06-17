@@ -20,22 +20,35 @@ const PopularPosts = (SearchItem, posts) => {
   return SortedPosts;
 };
 
+const SearchPosts = (posts, SearchSymbol) => {
+  if (SearchSymbol) {
+    return [
+      ...posts.filter((item) =>
+        item.name.toLowerCase().includes(SearchSymbol.toLowerCase())
+      ),
+    ];
+  }
+  return posts;
+};
+
 export const UseSortedPosts = (
   SearchCategory,
   SearchItem,
-  SearchSymbol,
+  SearchSymbol = "",
   posts
 ) => {
-  const result = PopularPosts(SearchItem, posts);
+  const result2 = SearchPosts(PopularPosts(SearchItem, posts), SearchSymbol);
+  // const result2 = SearchPosts(result, SearchSymbol);
   const ChoosedCategory = useMemo(() => {
     if (SearchCategory) {
       if (SearchCategory == "all") {
-        return result;
+        return result2;
       } else {
-        return [...posts.filter((items) => items[SearchCategory] == true)];
+        console.log(2);
+        return [...result2.filter((items) => items[SearchCategory] == true)];
       }
     }
-    return result;
-  }, [result, SearchCategory, SearchItem]);
+    return result2;
+  }, [result2, SearchCategory, SearchItem, SearchSymbol]);
   return ChoosedCategory;
 };

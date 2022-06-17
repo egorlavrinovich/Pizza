@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import logo from "./pizza-logo.svg";
 import Shopingcart from "../Shopingcart/Shopingcart";
 import { Link } from "react-router-dom";
@@ -8,7 +8,7 @@ import { filterSymbol } from "../../redux/Slice/FilterSlice";
 const Header = () => {
   const dispatch = useDispatch();
   const [state, setstate] = useState("");
-  const ValuesInput = useMemo(() => {
+  useEffect(() => {
     dispatch(filterSymbol(state));
   }, [state]);
   return (
