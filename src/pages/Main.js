@@ -14,6 +14,9 @@ import { filterPopular, filterCategory } from "../redux/Slice/FilterSlice";
 import { getAllPizzes, fetchUserById } from "../redux/Slice/AllPizzasSlice";
 import { SetPage } from "../redux/Slice/Page";
 import { usePagination } from "../hooks/Pagination";
+import Drinks from "../components/DrinksBlock/Drinks";
+import { getDrinks } from "../API/fetchdrinks";
+import { AddDrinks } from "../redux/Slice/AllDrinksSlice";
 function App() {
   const dispatch = useDispatch();
   const SearchItem = useSelector((state) => state.filter.popular); // Redux popular filter
@@ -22,12 +25,15 @@ function App() {
   const page = useSelector((state) => state.page.page); // current page
   const limit = useSelector((state) => state.page.limit); // current limit
   const posts = useSelector((state) => state.posts.Pizzes); // all posts
-  const lastelement = useRef();
+  const lastelement = useRef(); // ref на lastelement
+  const drinks = useSelector((state) => state.drinks.drinks);
   const [getItems, load, error] = Fetch(async function getPosts() {
     const items = await fetchposts(page, limit);
+    const drinks = await getDrinks();
+    dispatch(AddDrinks(drinks));
     if (page <= 2) dispatch(getAllPizzes([...items]));
   });
-  usePagination(lastelement, page < 3, load, () => dispatch(SetPage(page + 1)));
+  usePagination(lastelement, page < 3, load, () => dispatch(SetPage(page + 1))); // Infinity pagination
   useEffect(() => {
     getItems();
   }, [page]);
@@ -55,9 +61,20 @@ function App() {
               (load && !posts.length && <Loader />) || (
                 <>
                   <Pizza pizza={SortedPosts} />
-                  <div style={{ opacity: "0" }} ref={lastelement}>
+                  <div
+                    style={{ opacity: "0", height: "1px" }}
+                    ref={lastelement}
+                  >
                     Контролируемый элемент
                   </div>
+                  {page >= 3 && (
+                    <div className="container_drinks">
+                      <h2 className="content__title">Напитки</h2>
+                      <div className="content__items">
+                        <Drinks drinks={drinks} />
+                      </div>
+                    </div>
+                  )}
                 </>
               )
             ) : (
