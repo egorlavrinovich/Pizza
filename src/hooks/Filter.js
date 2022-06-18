@@ -1,7 +1,7 @@
 import { useEffect, useMemo } from "react";
 const PopularPosts = (SearchItem, posts) => {
-  console.log(posts);
   const SortedPosts = useMemo(() => {
+    console.log(posts);
     const post = [...posts];
     if (SearchItem) {
       switch (SearchItem) {
@@ -37,7 +37,6 @@ export const UseSortedPosts = (
   SearchSymbol = "",
   posts
 ) => {
-  console.log(posts);
   const result2 = SearchPosts(PopularPosts(SearchItem, posts), SearchSymbol);
   const ChoosedCategory = useMemo(() => {
     if (SearchCategory) {

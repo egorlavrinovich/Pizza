@@ -13,6 +13,7 @@ import Button from "../components/button/button";
 import { filterPopular, filterCategory } from "../redux/Slice/FilterSlice";
 import { getAllPizzes, fetchUserById } from "../redux/Slice/AllPizzasSlice";
 import { SetPage } from "../redux/Slice/Page";
+import { usePagination } from "../hooks/Pagination";
 function App() {
   const dispatch = useDispatch();
   const SearchItem = useSelector((state) => state.filter.popular); // Redux popular filter
@@ -22,22 +23,11 @@ function App() {
   const limit = useSelector((state) => state.page.limit); // current limit
   const posts = useSelector((state) => state.posts.Pizzes); // all posts
   const lastelement = useRef();
-  const observer = useRef();
   const [getItems, load, error] = Fetch(async function getPosts() {
     const items = await fetchposts(page, limit);
     if (page <= 2) dispatch(getAllPizzes([...items]));
   });
-  useEffect(() => {
-    if (load) return;
-    if (observer.current) observer.current.disconnect();
-    var callback = function (entries, observer) {
-      if (entries[0].isIntersecting && page < 3) {
-        dispatch(SetPage(page + 1));
-      }
-    };
-    observer.current = new IntersectionObserver(callback);
-    observer.current.observe(lastelement.current);
-  }, [load]);
+  usePagination(lastelement, page < 3, load, () => dispatch(SetPage(page + 1)));
   useEffect(() => {
     getItems();
   }, [page]);
@@ -59,13 +49,15 @@ function App() {
       <div className="content">
         <div className="container">
           <Panel sort={SetSearchItem} categories={SetCategory}></Panel>
-          <h2 className="content__title">Все пиццы</h2>
+          <h2 className="content__title">Пиццы</h2>
           <div className="content__items">
             {!error ? (
               (load && !posts.length && <Loader />) || (
                 <>
                   <Pizza pizza={SortedPosts} />
-                  <div ref={lastelement}>Last</div>
+                  <div style={{ opacity: "0" }} ref={lastelement}>
+                    Контролируемый элемент
+                  </div>
                 </>
               )
             ) : (
