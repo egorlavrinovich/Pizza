@@ -21,15 +21,16 @@ export const AllPizzas = createSlice({
   name: "allpizzas",
   initialState,
   reducers: {
-    getAllPizzes(state, action) {},
+    getAllPizzes(state, action) {
+      state.Pizzes = [...state.Pizzes, ...action.payload];
+    },
   },
   extraReducers: {
     [fetchUserById.pending]: (state, action) => {
       console.log(state);
     },
     [fetchUserById.fulfilled]: (state, action) => {
-      // Дописать про загрузку и вынести отдельный стейт загрузчика в InitialState
-      state.Pizzes.push(...action.payload);
+      console.log(action.payload);
     },
     [fetchUserById.rejected]: (state, action) => {
       console.log(state);

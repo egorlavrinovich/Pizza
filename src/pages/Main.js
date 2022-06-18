@@ -14,35 +14,32 @@ import { filterPopular, filterCategory } from "../redux/Slice/FilterSlice";
 import { getAllPizzes, fetchUserById } from "../redux/Slice/AllPizzasSlice";
 import { SetPage } from "../redux/Slice/Page";
 function App() {
-  const [posts, setposts] = useState([]);
   const dispatch = useDispatch();
   const SearchItem = useSelector((state) => state.filter.popular); // Redux popular filter
   const Searchcategory = useSelector((state) => state.filter.category); // Redux category filter
   const SearchSymbol = useSelector((state) => state.filter.symbol); // Redux input filter
   const page = useSelector((state) => state.page.page); // current page
-  const limit = useSelector((state) => state.page.limit); // current page
+  const limit = useSelector((state) => state.page.limit); // current limit
+  const posts = useSelector((state) => state.posts.Pizzes); // all posts
   const lastelement = useRef();
   const observer = useRef();
   const [getItems, load, error] = Fetch(async function getPosts() {
     const items = await fetchposts(page, limit);
-    setposts([...posts, ...items]);
+    if (page <= 2) dispatch(getAllPizzes([...items]));
   });
-  console.log(page);
   useEffect(() => {
     if (load) return;
     if (observer.current) observer.current.disconnect();
     var callback = function (entries, observer) {
-      if (entries[0].isIntersecting && page < 2) {
+      if (entries[0].isIntersecting && page < 3) {
         dispatch(SetPage(page + 1));
       }
     };
     observer.current = new IntersectionObserver(callback);
     observer.current.observe(lastelement.current);
   }, [load]);
-
   useEffect(() => {
     getItems();
-    dispatch(fetchUserById());
   }, [page]);
   const SortedPosts = UseSortedPosts(
     Searchcategory,
