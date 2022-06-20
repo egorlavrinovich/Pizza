@@ -22,8 +22,7 @@ export const AllPizzas = createSlice({
   initialState,
   reducers: {
     getAllPizzes(state, action) {
-      // state.Pizzes = [...state.Pizzes, ...action.payload];
-      state.Pizzes = action.payload
+      state.Pizzes = [...state.Pizzes, ...action.payload];
     },
   },
   extraReducers: {

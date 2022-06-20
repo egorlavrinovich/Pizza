@@ -30,8 +30,8 @@ function App() {
   const [getItems, load, error] = Fetch(async function getPosts() {
     const items = await fetchposts(page, limit);
     const drinks = await getDrinks(1,10);
-    if (page <=1)dispatch(AddDrinks(drinks)); //! Поправить
     if (page <= 2) dispatch(getAllPizzes([...items]));
+    if (page <=1)dispatch(AddDrinks(drinks)); //! Поправить
   });
   usePagination(lastelement, page < 3, load, () => dispatch(SetPage(page + 1))); // Infinity pagination
   useEffect(() => {
