@@ -19,15 +19,7 @@ const Drinks = ({ drinks }) => {
     <div className="pizza-block" key={item.id}>
       <img className="pizza-block__image" src={item.url} alt="Pizza" />
       <h4 className="pizza-block__title">{item.name}</h4>
-      <div className="pizza-block__selector">
-        <DrinkVolume volume={item.volume}/>
-      </div>
-      <div className="pizza-block__bottom">
-        <div className="pizza-block__price">{item.price}</div>
-        <div onClick={() => AddGood(item)}>
-          <Button add />
-        </div>
-      </div>
+        <DrinkVolume volume={item.volume} price={item.price}/>
     </div>
   ));
 };
