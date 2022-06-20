@@ -1,35 +1,53 @@
 import { useEffect, useMemo } from "react";
 const PopularPosts = (SearchItem, posts) => {
+  const SortedPosts = useMemo(() => {
+    console.log(posts);
+    const post = [...posts];
     if (SearchItem) {
-      console.log(SearchItem)
-      console.log(posts)
       switch (SearchItem) {
         case "price":
-          return [...posts.sort()];
-        // case "popular":
-        //   return [...posts.sort((a, b) => b[SearchItem] - a[SearchItem])];
+          return [...post.sort((a, b) => a - b)];
+        case "popular":
+          return [...post.sort((a, b) => b[SearchItem] - a[SearchItem])];
         case "name":
-          return [...posts].sort((a, b) =>
-            a[SearchItem].localeCompare(b[SearchItem])
-          );
+          return post;
         default:
-          return posts;
+          return post;
       }
     }
     return posts;
+  }, [posts, SearchItem]);
+  return SortedPosts;
 };
 
-export const UseSortedPosts = (SearchCategory = "all", SearchItem, posts) => {
-  const result = PopularPosts(SearchItem, posts);
+const SearchPosts = (posts, SearchSymbol) => {
+  if (SearchSymbol) {
+    return [
+      ...posts.filter((item) =>
+        item.name.toLowerCase().includes(SearchSymbol.toLowerCase())
+      ),
+    ];
+  }
+  return posts;
+};
+
+export const UseSortedPosts = (
+  SearchCategory,
+  SearchItem,
+  SearchSymbol = "",
+  posts
+) => {
+  const result2 = SearchPosts(PopularPosts(SearchItem, posts), SearchSymbol);
   const ChoosedCategory = useMemo(() => {
     if (SearchCategory) {
       if (SearchCategory == "all") {
-        return result;
+        return result2;
       } else {
-        return [...posts.filter((items) => items[SearchCategory] == true)];
+        console.log(2);
+        return [...result2.filter((items) => items[SearchCategory] == true)];
       }
     }
-    return result;
-  }, [result, SearchCategory, SearchItem]);
+    return result2;
+  }, [result2, SearchCategory, SearchItem, SearchSymbol]);
   return ChoosedCategory;
 };
