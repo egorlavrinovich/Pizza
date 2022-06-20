@@ -61,12 +61,6 @@ function App() {
               (load && !posts.length && <Loader />) || (
                 <>
                   <Pizza pizza={SortedPosts} />
-                  <div
-                    style={{ opacity: "0", height: "1px" }}
-                    ref={lastelement}
-                  >
-                    Контролируемый элемент
-                  </div>
                   {page >= 3 && (
                     <div className="container_drinks">
                       <h2 className="content__title">Напитки</h2>
@@ -75,6 +69,12 @@ function App() {
                       </div>
                     </div>
                   )}
+                  <div
+                    style={{ opacity: "0", height: "1px" }}
+                    ref={lastelement}
+                  >
+                    Контролируемый элемент
+                  </div>
                 </>
               )
             ) : (
