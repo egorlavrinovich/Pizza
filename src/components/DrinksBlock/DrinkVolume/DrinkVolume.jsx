@@ -1,9 +1,9 @@
 import React from 'react';
 import { useState } from 'react';
 import classNames from 'classnames';
-const DrinkVolume = ({AddSize}) => {
-    const AllSize = [0.5,1]
-    const [Size,SetSize] = useState(0.5)
+const DrinkVolume = ({AddSize,volume}) => {
+    const AllSize = [...volume]
+    const [Size,SetSize] = useState(volume[0])
     function AddProperty(size) {
         SetSize(size)
         AddSize(Size)

@@ -7,8 +7,6 @@ import { AddDrinks } from "../../redux/Slice/AllDrinksSlice";
 import { useState } from "react";
 import DrinkVolume from './DrinkVolume/DrinkVolume';
 const Drinks = ({ drinks }) => {
-  const sizes = [0.5, 1];
-  const [Amount, SetAmount] = useState(0.5);
   const [Product, SetProduct] = useState({})
   const dispatch = useDispatch();
   function AddProperty(item) {
@@ -22,7 +20,7 @@ const Drinks = ({ drinks }) => {
       <img className="pizza-block__image" src={item.url} alt="Pizza" />
       <h4 className="pizza-block__title">{item.name}</h4>
       <div className="pizza-block__selector">
-        <DrinkVolume/>
+        <DrinkVolume volume={item.volume}/>
       </div>
       <div className="pizza-block__bottom">
         <div className="pizza-block__price">{item.price}</div>
