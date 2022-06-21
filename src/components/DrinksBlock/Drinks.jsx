@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { AddPizza } from '../../redux/Slice/PriceSlice';
-import DrinkVolume from './Amount/DrinkVolume';
+import DrinkVolume from './Volume/DrinkVolume'
 const Drinks = ({ drinks }) => {
   const dispatch = useDispatch();
   function AddGoods(item) {
