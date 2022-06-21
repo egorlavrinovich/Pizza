@@ -6,6 +6,7 @@ const initialState = {
   price: 0,
   count: 0,
   pizzas: [],
+  drinks:[],
   counterPizzes: {},
 };
 
@@ -15,24 +16,40 @@ export const ShoppingCart = createSlice({
   reducers: {
     AddPizza(state, action) {
       function findElem(obj) {
-        const result = state.pizzas.filter(
-          (item) =>
-            item.url == obj.url &&
-            item.dough == obj.dough &&
-            item.length == obj.length
-        );
+        let result=[]
+        console.log(obj.type)
+        switch (obj.type) {
+          case "pizzas":
+            result = state.pizzas.filter(
+              (item) =>
+                item.url == obj.url &&
+                item.dough == obj.dough &&
+                item.length == obj.length
+            );
+            break;
+            case "drinks":
+              result = state.drinks.filter(
+                (item) =>
+                  item.url == obj.url &&
+                  item.volume == obj.volume
+              );
+              break;
+          default: return obj;
+        }
         if (result.length) {
           result[0].count += 1;
           return false;
         }
         return result;
       }
-      if (findElem(action.payload))
-        state.pizzas.push({
+      if (findElem(action.payload)){
+        const way = action.payload.type // Указываем путь массива, куда будем добавлять наши элементы
+        state[way].push({
           ShopcartId: Date.now(),
           ...action.payload,
           count: 1,
         });
+      }
       state.price += action.payload.price;
       state.count += 1;
     },

@@ -16,12 +16,25 @@ export const ShoppingCart = createSlice({
   reducers: {
     AddPizza(state, action) {
       function findElem(obj) {
-        const result = state.pizzas.filter(
-          (item) =>
-            item.url == obj.url &&
-            item.dough == obj.dough &&
-            item.length == obj.length
-        );
+        const result=[]
+        switch (obj.type) {
+          case "pizza":
+            result = state.pizzas.filter(
+              (item) =>
+                item.url == obj.url &&
+                item.dough == obj.dough &&
+                item.length == obj.length
+            );
+            break;
+            case "drinks":
+              result = state.pizzas.filter(
+                (item) =>
+                  item.url == obj.url &&
+                  item.volume == obj.volume
+              );
+              break;
+          default: return obj;
+        }
         if (result.length) {
           result[0].count += 1;
           return false;
@@ -29,11 +42,12 @@ export const ShoppingCart = createSlice({
         return result;
       }
       if (findElem(action.payload))
-        state.pizzas.push({
+        state.action.payload.type.push({
           ShopcartId: Date.now(),
           ...action.payload,
           count: 1,
         });
+        console.log(1)
       state.price += action.payload.price;
       state.count += 1;
     },

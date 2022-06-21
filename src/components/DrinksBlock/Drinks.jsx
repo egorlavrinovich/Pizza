@@ -1,14 +1,11 @@
 import React from "react";
-import Button from "../button/button";
-import Length from "../Pizza-block/PizzaItem/Length/Length";
-import classNames from "classnames";
 import { useDispatch } from "react-redux";
-import { useState } from "react";
+import { AddPizza } from '../../redux/Slice/PriceSlice';
 import DrinkVolume from './Amount/DrinkVolume';
 const Drinks = ({ drinks }) => {
   const dispatch = useDispatch();
   function AddGoods(item) {
-    console.log(item)
+    dispatch(AddPizza(item))
   }
 
 return (
