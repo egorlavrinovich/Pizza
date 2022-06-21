@@ -15,6 +15,7 @@ export const fetchUserById = createAsyncThunk(
 
 const initialState = {
   Pizzes: [],
+  Drinks:[]
 };
 
 export const AllPizzas = createSlice({
@@ -24,6 +25,9 @@ export const AllPizzas = createSlice({
     getAllPizzes(state, action) {
       state.Pizzes = [...state.Pizzes, ...action.payload];
     },
+    getAllDrinks(state,action){
+      state.Drinks=[...state.Drinks,...action.payload]
+    }
   },
   extraReducers: {
     [fetchUserById.pending]: (state, action) => {
@@ -37,6 +41,6 @@ export const AllPizzas = createSlice({
     },
   },
 });
-export const { getAllPizzes } = AllPizzas.actions;
+export const { getAllPizzes,getAllDrinks } = AllPizzas.actions;
 
 export default AllPizzas.reducer;

@@ -3,14 +3,18 @@ import { createSlice } from "@reduxjs/toolkit";
 export const Page = createSlice({
   name: "page",
   initialState: {
-    page: 1,
+    Pizzapage: 1,
     limit: 8,
+    Drinkspage:1,
   },
   reducers: {
     SetPage(state, action) {
-      state.page = action.payload;
+      state.Pizzapage = action.payload;
     },
+    SetDrinkPage(state,action){
+      state.Drinkspage = action.payload
+    }
   },
 });
-export const { SetPage } = Page.actions;
+export const { SetPage,SetDrinkPage } = Page.actions;
 export default Page.reducer;
