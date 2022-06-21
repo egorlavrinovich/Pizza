@@ -6,6 +6,7 @@ const initialState = {
   price: 0,
   count: 0,
   pizzas: [],
+  drinks:[],
   counterPizzes: {},
 };
 

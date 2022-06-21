@@ -2,14 +2,16 @@ import React from 'react';
 import { useState } from 'react';
 import classNames from 'classnames';
 import Button from '../../button/button';
-const DrinkVolume = ({AddSize,volume, price}) => {
+const DrinkVolume = ({volume, price, AddGoods}) => {
     const AllSize = [...volume]
     const [Size,SetSize] = useState(volume[0])
     const [Price,SetPrice] = useState(price[0])
     function AddProperty(size) {
         SetPrice(price[AllSize.indexOf(size)])
         SetSize(size)
-        AddSize(Size)
+    }
+    function AddGood() {
+      AddGoods({price:price,volume:volume})
     }
     return (
         <div>
@@ -31,7 +33,7 @@ const DrinkVolume = ({AddSize,volume, price}) => {
         <div className="pizza-block__bottom">
         <div className="pizza-block__price">{`${Price} руб`}</div>
         <div>
-          <Button add />
+          <Button add onClick={()=>console.log(1)} />
         </div>
       </div>
       </div>
