@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import classNames from 'classnames';
 import Button from '../../button/button';
-const DrinkVolume = ({volume, price, AddGoods}) => {
+const DrinkVolume = ({volume, price, AddGoods,item}) => {
     const AllSize = [...volume]
     const [Size,SetSize] = useState(volume[0])
     const [Price,SetPrice] = useState(price[0])
@@ -11,7 +11,7 @@ const DrinkVolume = ({volume, price, AddGoods}) => {
         SetSize(size)
     }
     function AddGood() {
-      AddGoods({price:price,volume:volume})
+      AddGoods({...item,price:Price,volume:Size})
     }
     return (
         <div>
@@ -32,8 +32,8 @@ const DrinkVolume = ({volume, price, AddGoods}) => {
         </div>
         <div className="pizza-block__bottom">
         <div className="pizza-block__price">{`${Price} руб`}</div>
-        <div>
-          <Button add onClick={()=>console.log(1)} />
+        <div onClick={()=>AddGood()}>
+          <Button add />
         </div>
       </div>
       </div>
