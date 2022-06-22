@@ -17,7 +17,6 @@ export const ShoppingCart = createSlice({
     AddPizza(state, action) {
       function findElem(obj) {
         let result=[]
-        console.log(obj.type)
         switch (obj.type) {
           case "pizzas":
             result = state.pizzas.filter(
