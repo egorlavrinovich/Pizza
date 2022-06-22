@@ -1,8 +1,6 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { useState } from "react";
+import React from "react";
+import { useSelector} from "react-redux";
 import PizzaShopCartItem from "./PizzaShopcartItem.jsx/PizzaShopCartItem";
-import { Link } from "react-router-dom";
 import DrinkCart from './DrinkCart/DrinkCart';
 import EmptyCart from './EmptyCart/EmptyCart';
 const PizzaShopcart = () => {
