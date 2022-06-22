@@ -1,12 +1,9 @@
-import React from "react";
 import { createSlice, current } from "@reduxjs/toolkit/";
-import { useEffect, useMemo, useState } from "react";
-
 const initialState = {
   price: 0,
   count: 0,
   pizzas: [],
-  drinks:[],
+  drinks: [],
   counterPizzes: {},
 };
 
@@ -16,7 +13,7 @@ export const ShoppingCart = createSlice({
   reducers: {
     AddPizza(state, action) {
       function findElem(obj) {
-        let result=[]
+        let result = [];
         switch (obj.type) {
           case "pizzas":
             result = state.pizzas.filter(
@@ -26,14 +23,13 @@ export const ShoppingCart = createSlice({
                 item.length == obj.length
             );
             break;
-            case "drinks":
-              result = state.drinks.filter(
-                (item) =>
-                  item.url == obj.url &&
-                  item.volume == obj.volume
-              );
-              break;
-          default: return obj;
+          case "drinks":
+            result = state.drinks.filter(
+              (item) => item.url == obj.url && item.volume == obj.volume
+            );
+            break;
+          default:
+            return obj;
         }
         if (result.length) {
           result[0].count += 1;
@@ -41,8 +37,8 @@ export const ShoppingCart = createSlice({
         }
         return result;
       }
-      if (findElem(action.payload)){
-        const way = action.payload.type // Указываем путь массива, куда будем добавлять наши элементы
+      if (findElem(action.payload)) {
+        const way = action.payload.type; // Указываем путь массива, куда будем добавлять наши элементы
         state[way].push({
           ShopcartId: Date.now(),
           ...action.payload,
@@ -53,16 +49,17 @@ export const ShoppingCart = createSlice({
       state.count += 1;
     },
     DeletePizza(state, action) {
-      const findobj = state.pizzas[action.payload.index]; // Обязательно записываем наш стейт в переменную
-      state.pizzas = state.pizzas.filter(
+      const way = action.payload.type;
+      state[way] = state[way].filter(
         (item, index) => index !== action.payload.index
       );
-      state.count -= findobj.count;
-      state.price -= +findobj.count * +action.payload.price;
+      state.count -= action.payload.count;
+      state.price -= +action.payload.count * +action.payload.price;
     },
     ReducePizza(state, action) {
-      if (state.pizzas[action.payload.index].count > 1) {
-        state.pizzas[action.payload.index].count -= 1;
+      const way = action.payload.type;
+      if (state[way][action.payload.index].count > 1) {
+        state[way][action.payload.index].count -= 1;
         state.count -= 1;
         state.price -= action.payload.price;
       }
@@ -71,5 +68,3 @@ export const ShoppingCart = createSlice({
 });
 export const { AddPizza, DeletePizza, ReducePizza } = ShoppingCart.actions;
 export default ShoppingCart.reducer;
-
-

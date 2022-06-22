@@ -5,7 +5,7 @@ const PopularPosts = (SearchItem, posts) => {
     if (SearchItem) {
       switch (SearchItem) {
         case "price":
-          return [...post.sort((a, b) => a - b)];
+          return [...post.sort((a, b) => a[SearchItem] - b[SearchItem])];
         case "popular":
           return [...post.sort((a, b) => b[SearchItem] - a[SearchItem])];
         case "name":

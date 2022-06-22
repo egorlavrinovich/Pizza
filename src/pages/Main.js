@@ -12,11 +12,11 @@ import { useSelector, useDispatch } from "react-redux";
 import Button from "../components/button/button";
 import { filterPopular, filterCategory } from "../redux/Slice/FilterSlice";
 import { getAllPizzes, fetchUserById } from "../redux/Slice/AllPizzasSlice";
-import { SetPage,SetDrinkPage } from "../redux/Slice/Page";
+import { SetPage, SetDrinkPage } from "../redux/Slice/Page";
 import { usePagination } from "../hooks/Pagination";
 import Drinks from "../components/DrinksBlock/Drinks";
 import { getDrinks } from "../API/fetchdrinks";
-import {getAllDrinks} from '../redux/Slice/AllPizzasSlice'
+import { getAllDrinks } from "../redux/Slice/AllPizzasSlice";
 function App() {
   const dispatch = useDispatch();
   const SearchItem = useSelector((state) => state.filter.popular); // Redux popular filter
@@ -24,27 +24,37 @@ function App() {
   const SearchSymbol = useSelector((state) => state.filter.symbol); // Redux input filter
   const PizzaPage = useSelector((state) => state.page.Pizzapage); // current Pizzapage
   const limit = useSelector((state) => state.page.limit); // current limit Pizzapage
-  const DrinksPage = useSelector((state)=>state.page.Drinkspage) // current Drinkpage
+  const DrinksPage = useSelector((state) => state.page.Drinkspage); // current Drinkpage
   const drinks = useSelector((state) => state.posts.Drinks); // all drinks
-  const posts = useSelector((state) => state.posts.Pizzes); // all posts
+  const pizzes = useSelector((state) => state.posts.Pizzes); // all pizzes
   const lastelement = useRef(); // ref на lastelement
   const [getItems, load, error] = Fetch(async function getPosts() {
     const items = await fetchposts(PizzaPage, limit);
-    const drinks = await getDrinks(DrinksPage,4);
+    const drinks = await getDrinks(DrinksPage, 4);
     if (PizzaPage < 3) dispatch(getAllPizzes([...items]));
-    if (PizzaPage >=4) dispatch(getAllDrinks([...drinks])); 
+    if (PizzaPage >= 4) dispatch(getAllDrinks([...drinks]));
   });
-  usePagination(lastelement, PizzaPage <= 3, load, () => dispatch(SetPage(PizzaPage + 1))); // Infinity pagination for Pizza
-  usePagination(lastelement, PizzaPage >= 4 && DrinksPage<3, load, () => dispatch(SetDrinkPage(DrinksPage + 1))); // Infinity pagination for Drinks
+  usePagination(lastelement, PizzaPage <= 3, load, () =>
+    dispatch(SetPage(PizzaPage + 1))
+  ); // Infinity pagination for Pizza
+  usePagination(lastelement, PizzaPage >= 4 && DrinksPage < 3, load, () =>
+    dispatch(SetDrinkPage(DrinksPage + 1))
+  ); // Infinity pagination for Drinks
   useEffect(() => {
     getItems();
-  }, [PizzaPage,DrinksPage]);
+  }, [PizzaPage, DrinksPage]);
   const SortedPosts = UseSortedPosts(
     Searchcategory,
     SearchItem,
     SearchSymbol,
-    posts
-  ); // Кастомный хук сортировки
+    pizzes
+  ); // Сортировка Пицц
+  const SortedDrinks = UseSortedPosts(
+    Searchcategory,
+    SearchItem,
+    SearchSymbol,
+    drinks
+  );
   function SetSearchItem(item) {
     dispatch(filterPopular(item));
   }
@@ -60,18 +70,20 @@ function App() {
           <h2 className="content__title">Пиццы</h2>
           <div className="content__items">
             {!error ? (
-              (load && !posts.length && <Loader />) || (
+              (load && !pizzes.length && <Loader />) || (
                 <>
                   <Pizza pizza={SortedPosts} />
                   {PizzaPage >= 3 && (
                     <div className="container_drinks">
                       <h2 className="content__title">Напитки</h2>
                       <div className="content__items">
-                        <Drinks drinks={drinks} />
+                        <Drinks drinks={SortedDrinks} />
                       </div>
                     </div>
                   )}
-                  <div style={{opacity:0}} ref={lastelement}>Control element</div> 
+                  <div style={{ opacity: 0 }} ref={lastelement}>
+                    Control element
+                  </div>
                 </>
               )
             ) : (
