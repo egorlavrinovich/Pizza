@@ -26,14 +26,24 @@ const PizzaShopCartItem = ({ index, item }) => {
             <div className="shoppricemobile">
               {`Цена: ${item.price} ₽`}
               <div className="counter">
-                <div className="minus">
+                <div
+                  className="minus"
+                  onClick={() =>
+                    dispatch(ReducePizza({ ...item, index: index }))
+                  }
+                >
                   <Svg svg="minus" />
                 </div>
-                <div className="count">1</div>
-                <div className="plus">
+                <div className="count">{AvailablePiezzes[index].count}</div>
+                <div className="plus" onClick={() => dispatch(AddPizza(item))}>
                   <Svg svg="plus" />
                 </div>
-                <div className="trash">
+                <div
+                  className="trash"
+                  onClick={() =>
+                    dispatch(DeletePizza({ ...item, index: index }))
+                  }
+                >
                   <Svg svg="trash" />
                 </div>
               </div>

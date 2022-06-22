@@ -16,6 +16,10 @@ const Pizza = React.memo(({ pizza }) => {
     // Добавляем с помощью диспатча кол-во товара в корзину, отправляем данные на store
     dispatch(AddPizza({ ...item, ...state }));
   }
+  const AllPizzes = useSelector((state) => state.shopcart.pizzas);
+  function Counter(finditem) {
+    return AllPizzes.find((item) => item.id == finditem.id)?.count;
+  }
   return (
     <>
       {pizza.map((item, id) => (
@@ -29,7 +33,7 @@ const Pizza = React.memo(({ pizza }) => {
           <div className="pizza-block__bottom">
             <div className="pizza-block__price">{item.price}</div>
             <div onClick={() => AddGood(item)}>
-              <Button add />
+              <Button add item={item} />
             </div>
           </div>
         </div>

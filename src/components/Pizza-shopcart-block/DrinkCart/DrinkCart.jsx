@@ -1,12 +1,16 @@
-import React from 'react';
-import Svg from '../../UI/svg/svg';
-import { useDispatch, useSelector } from 'react-redux';
-import { ReducePizza, AddPizza, DeletePizza } from '../../../redux/Slice/PriceSlice';
-const DrinkCart = ({item,index}) => {
-    const dispatch = useDispatch()
-    const OrderedDrinks = useSelector((state)=>state.shopcart.drinks)
-    return (
-        <div>
+import React from "react";
+import Svg from "../../UI/svg/svg";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  ReducePizza,
+  AddPizza,
+  DeletePizza,
+} from "../../../redux/Slice/PriceSlice";
+const DrinkCart = ({ item, index }) => {
+  const dispatch = useDispatch();
+  const OrderedDrinks = useSelector((state) => state.shopcart.drinks);
+  return (
+    <div>
       <ul key={index}>
         <li>
           <img src={item.url} />
@@ -16,14 +20,24 @@ const DrinkCart = ({item,index}) => {
             <div className="shoppricemobile">
               {`Цена: ${item.price} ₽`}
               <div className="counter">
-                <div className="minus">
+                <div
+                  className="minus"
+                  onClick={() =>
+                    dispatch(ReducePizza({ ...item, index: index }))
+                  }
+                >
                   <Svg svg="minus" />
                 </div>
-                <div className="count">1</div>
-                <div className="plus">
+                <div className="count">{OrderedDrinks[index].count}</div>
+                <div className="plus" onClick={() => dispatch(AddPizza(item))}>
                   <Svg svg="plus" />
                 </div>
-                <div className="trash">
+                <div
+                  className="trash"
+                  onClick={() =>
+                    dispatch(DeletePizza({ ...item, index: index }))
+                  }
+                >
                   <Svg svg="trash" />
                 </div>
               </div>
@@ -53,7 +67,7 @@ const DrinkCart = ({item,index}) => {
         </li>
       </ul>
     </div>
-    );
+  );
 };
 
 export default DrinkCart;
