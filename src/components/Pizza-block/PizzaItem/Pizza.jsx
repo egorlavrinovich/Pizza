@@ -5,15 +5,13 @@ import Dough from "./Dough/Dough";
 import Length from "./Length/Length";
 import { useSelector, useDispatch } from "react-redux";
 import { AddPizza } from "../../../redux/Slice/PriceSlice";
+import PizzaPrice from './Price/PizzaPrice'
+import PizzaBlockSelector from './Price/PizzaBlockSelector/PizzaBlockSelector';
 
 const Pizza = React.memo(({ pizza }) => {
-  const [state, setstate] = useState({ dough: "традиционное", length: 26 });
   const dispatch = useDispatch();
-  function AddProperty(item) {
-    setstate({ ...state, ...item });
-  }
   function AddGood(item) {
-    dispatch(AddPizza({ ...item, ...state }));
+    dispatch(AddPizza(item));
   }
   return (
     <>
@@ -21,16 +19,7 @@ const Pizza = React.memo(({ pizza }) => {
         <div className="pizza-block" key={id}>
           <img className="pizza-block__image" src={item.url} alt="Pizza" />
           <h4 className="pizza-block__title">{item.name}</h4>
-          <div className="pizza-block__selector">
-            <Dough AddDough={AddProperty} />
-            <Length AddLength={AddProperty} />
-          </div>
-          <div className="pizza-block__bottom">
-            <div className="pizza-block__price">{item.price}</div>
-            <div onClick={() => AddGood(item)}>
-              <Button add item={item} />
-            </div>
-          </div>
+          <PizzaBlockSelector item={item} AddGood={AddGood}/>
         </div>
       ))}
     </>

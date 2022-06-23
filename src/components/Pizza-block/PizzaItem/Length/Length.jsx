@@ -1,9 +1,7 @@
 import React, { useEffect } from 'react';
 import classNames from "classnames";
 import { useState } from "react";
-
-
-const Length = React.memo(({AddLength}) => {
+const Length = React.memo(({AddLength,SetLength}) => {
     const [State, setstate] = useState({length: 26 });
     const sizes = [26, 30, 40];
     function addLength(params) {

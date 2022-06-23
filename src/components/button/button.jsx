@@ -6,7 +6,6 @@ import { useEffect } from "react";
 const Button = ({ add = false, also, children, item}) => {
   const [Counter,SetCounter] = useState(0)
   const AllItemsShopcart = useSelector((state)=>state.shopcart[item.type])
-  console.log(AllItemsShopcart)
   useEffect(()=>{
     const GoodsCount = AllItemsShopcart.reduce((acc,w)=>(w.id===item.id)?acc=+w.count:acc,0)
     SetCounter(GoodsCount)
