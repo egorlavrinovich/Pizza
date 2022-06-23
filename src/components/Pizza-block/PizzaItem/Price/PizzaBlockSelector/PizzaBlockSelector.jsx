@@ -12,11 +12,11 @@ const PizzaBlockSelector = ({AddGood,item}) => {
     return (
         <>
         <div className="pizza-block__selector">
-            <Dough AddDough={AddProperty} />
-            <Length AddLength={AddProperty} />
+            <Dough AddDough={AddProperty} item={item} />
+            <Length AddLength={AddProperty} item={item} />
           </div>
           <div className="pizza-block__bottom">
-          <PizzaPrice item={item} ChoosedLength={ChoosedProporties} SetChoosedProporties={SetChoosedProporties}  />
+          <PizzaPrice item={item} ChoosedLength={ChoosedProporties} SetChoosedProporties={SetChoosedProporties}/>
             <div onClick={() => AddGood({...item,...ChoosedProporties})}>
               <Button add item={item} />
             </div>

@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import classNames from "classnames";
+import { useSelector } from 'react-redux';
 
-const Dough = React.memo(({AddDough}) => {
+const Dough = React.memo(({AddDough,item}) => {
+  const AllPizzes = useSelector((state)=>state.shopcart.pizzas)
   const [State, SetState] = useState({ dough: "традиционное"});
   const typeNames = ["тонкое", "традиционное"];
   function Dough(param) {
