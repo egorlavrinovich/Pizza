@@ -3,25 +3,17 @@ import classNames from "classnames";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 
-const Button = ({ add = false, also, children, item }) => {
-  const [Count, SetCount] = useState(0);
-
-  const AllPizzes = useSelector((state) => state.shopcart.pizzas);
-
-  function Counter(finditem) {
-    // Допилить, вылазит NaN
-    SetCount(
-      AllPizzes.filter((item) => item.url == finditem.url).reduce(
-        (acc, item) => acc.count + item.count,
-        0
-      )
-    );
-  }
-
+const Button = ({ add = false, also, children, item}) => {
+  const [Counter,SetCounter] = useState(0)
+  const AllItemsShopcart = useSelector((state)=>state.shopcart[item.type])
+  console.log(AllItemsShopcart)
+  useEffect(()=>{
+    const GoodsCount = AllItemsShopcart.reduce((acc,w)=>(w.id===item.id)?acc=+w.count:acc,0)
+    SetCounter(GoodsCount)
+  },[ ,AllItemsShopcart])
   return (
     <>
       <div
-        onClick={() => Counter(item)}
         className={classNames("button", {
           "button--outline": also,
           "button--outline button--add": add,
@@ -43,7 +35,7 @@ const Button = ({ add = false, also, children, item }) => {
               />
             </svg>
             <span>Добавить</span>
-            <i>{Count}</i>
+            <i>{Counter}</i>
           </div>
         ) : (
           <></>
@@ -54,3 +46,11 @@ const Button = ({ add = false, also, children, item }) => {
 };
 
 export default Button;
+
+ // useEffect(() => {
+  //   SetCount(JSON.parse(window.localStorage.getItem(`${item.id}`)));
+  // }, []);
+
+  // useEffect(() => {
+  //   window.localStorage.setItem(`${item.id}`, Count);
+  // }, [Count]);

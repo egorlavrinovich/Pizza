@@ -13,12 +13,7 @@ const Pizza = React.memo(({ pizza }) => {
     setstate({ ...state, ...item });
   }
   function AddGood(item) {
-    // Добавляем с помощью диспатча кол-во товара в корзину, отправляем данные на store
     dispatch(AddPizza({ ...item, ...state }));
-  }
-  const AllPizzes = useSelector((state) => state.shopcart.pizzas);
-  function Counter(finditem) {
-    return AllPizzes.find((item) => item.id == finditem.id)?.count;
   }
   return (
     <>

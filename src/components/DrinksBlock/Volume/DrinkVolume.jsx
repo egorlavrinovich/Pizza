@@ -33,7 +33,7 @@ const DrinkVolume = ({volume, price, AddGoods,item}) => {
         <div className="pizza-block__bottom">
         <div className="pizza-block__price">{`${Price} руб`}</div>
         <div onClick={()=>AddGood()}>
-          <Button add />
+          <Button add item={item} />
         </div>
       </div>
       </div>
