@@ -40,9 +40,7 @@ function App() {
   usePagination(lastelement, PizzaPage >= 4 && DrinksPage < 3, load, () =>
     dispatch(SetDrinkPage(DrinksPage + 1))
   ); // Infinity pagination for Drinks
-  useEffect(() => {
-    getItems();
-  }, [PizzaPage, DrinksPage]);
+  const Pages = useMemo(()=>{getItems();},[PizzaPage, DrinksPage])
   const SortedPosts = UseSortedPosts(
     Searchcategory,
     SearchItem,
