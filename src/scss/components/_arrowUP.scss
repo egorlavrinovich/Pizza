@@ -1,0 +1,41 @@
+.ArrowUP{
+    display: inline-block;
+    position: fixed;
+    bottom: 5vw;
+    right: 12vw;
+    color: $orange;
+    transform: scale(2.2);
+    svg{
+        border-radius: 50%;
+        &:hover{
+            color: white;
+            background-color: $orange;
+        }
+    }
+    &.hidden{
+        opacity: 0;
+        transition: 0.55s opacity, 0.55s visibility
+    }
+    &.active{
+        opacity: 0.5;
+        visibility: visible;
+    }
+    @media screen and (max-width:912px) {
+        right: 8vw;
+    }
+    @media screen and (max-width:750px) {
+        right: 6vw;
+    }
+    @media screen and (min-width:1056px) {
+        right: 4vw;
+    }
+    @media screen and (min-width:1480px) {
+        right: 5vw;
+    }
+    @media screen and (min-width:1660px) {
+        right: 14vw;
+    }
+    &:hover{
+        opacity: 1;
+    }
+}

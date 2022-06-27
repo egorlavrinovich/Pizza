@@ -1,11 +1,6 @@
-import React, { useEffect, useMemo } from "react";
-import { useState } from "react";
-import Button from "../../button/button";
-import Dough from "./Dough/Dough";
-import Length from "./Length/Length";
-import { useSelector, useDispatch } from "react-redux";
+import React from "react";
+import { useDispatch } from "react-redux";
 import { AddPizza } from "../../../redux/Slice/PriceSlice";
-import PizzaPrice from './Price/PizzaPrice'
 import PizzaBlockSelector from './Price/PizzaBlockSelector/PizzaBlockSelector';
 
 const Pizza = React.memo(({ pizza }) => {

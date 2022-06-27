@@ -17,6 +17,7 @@ import { usePagination } from "../hooks/Pagination";
 import Drinks from "../components/DrinksBlock/Drinks";
 import { getDrinks } from "../API/fetchdrinks";
 import { getAllDrinks } from "../redux/Slice/AllPizzasSlice";
+import ArrowUp from '../components/UI/ArrowUp/ArrowUp';
 function App() {
   const dispatch = useDispatch();
   const SearchItem = useSelector((state) => state.filter.popular); // Redux popular filter
@@ -28,6 +29,7 @@ function App() {
   const drinks = useSelector((state) => state.posts.Drinks); // all drinks
   const pizzes = useSelector((state) => state.posts.Pizzes); // all pizzes
   const lastelement = useRef(); // ref на lastelement
+  const ScrollElement = useRef()
   const [getItems, load, error] = Fetch(async function getPosts() {
     const items = await fetchposts(PizzaPage, limit);
     const drinks = await getDrinks(DrinksPage, 4);
@@ -63,9 +65,10 @@ function App() {
     <div className="wrapper">
       <Header></Header>
       <div className="content">
+      <ArrowUp observeelement={ScrollElement} />
         <div className="container">
           <Panel sort={SetSearchItem} categories={SetCategory}></Panel>
-          <h2 className="content__title">Пиццы</h2>
+          <h2 className="content__title" ref={ScrollElement}>Пиццы</h2>
           <div className="content__items">
             {!error ? (
               (load && !pizzes.length && <Loader />) || (
