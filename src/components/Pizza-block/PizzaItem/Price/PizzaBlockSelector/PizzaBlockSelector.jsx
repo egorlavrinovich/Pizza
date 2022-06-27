@@ -7,7 +7,6 @@ import Length from '../../Length/Length';
 const PizzaBlockSelector = ({AddGood,item}) => {
     const [ChoosedProporties, SetChoosedProporties] = useState({ dough: "традиционное", length: 26, price:item.price[0] });
     function AddProperty(proportiers) {
-      console.log(proportiers)
         SetChoosedProporties({ ...ChoosedProporties, ...proportiers });
       }
     return (
@@ -17,7 +16,7 @@ const PizzaBlockSelector = ({AddGood,item}) => {
             <Length AddLength={AddProperty} item={item} />
           </div>
           <div className="pizza-block__bottom">
-          <PizzaPrice item={item} ChoosedLength={ChoosedProporties} SetChoosedProporties={SetChoosedProporties}/>
+          <PizzaPrice item={item} ChoosedLength={ChoosedProporties.length} SetChoosedProporties={SetChoosedProporties}/>
             <div onClick={() => AddGood({...item,...ChoosedProporties})}>
               <Button add item={item} />
             </div>

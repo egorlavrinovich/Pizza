@@ -10,7 +10,7 @@ const PizzaPrice = ({item,ChoosedLength,SetChoosedProporties}) => {
         40:item.price[2]
     }
     return (
-        <div className="pizza-block__price">{`${map[ChoosedLength.length]} руб`}</div>
+        <div className="pizza-block__price">{`${map[ChoosedLength]} руб`}</div>
     );
 };
 
