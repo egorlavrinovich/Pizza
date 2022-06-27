@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 
 const PizzaPrice = ({item,ChoosedLength,SetChoosedProporties}) => {
     useEffect(()=>{
-        SetChoosedProporties({...ChoosedLength,price:map[ChoosedLength.length]})
-    },[])
+        SetChoosedProporties(ChoosedLength=>({...ChoosedLength,price:map[ChoosedLength.length]}))
+    },[ChoosedLength])
     const map = {
         26:item.price[0],
         30:item.price[1],

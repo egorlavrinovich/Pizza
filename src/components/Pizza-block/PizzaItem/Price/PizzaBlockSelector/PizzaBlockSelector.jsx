@@ -7,6 +7,7 @@ import Length from '../../Length/Length';
 const PizzaBlockSelector = ({AddGood,item}) => {
     const [ChoosedProporties, SetChoosedProporties] = useState({ dough: "традиционное", length: 26, price:item.price[0] });
     function AddProperty(proportiers) {
+      console.log(proportiers)
         SetChoosedProporties({ ...ChoosedProporties, ...proportiers });
       }
     return (

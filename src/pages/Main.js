@@ -29,7 +29,7 @@ function App() {
   const drinks = useSelector((state) => state.posts.Drinks); // all drinks
   const pizzes = useSelector((state) => state.posts.Pizzes); // all pizzes
   const lastelement = useRef(); // ref на lastelement
-  const ScrollElement = useRef()
+  const ScrollElement = useRef() // For ArrowUP
   const [getItems, load, error] = Fetch(async function getPosts() {
     const items = await fetchposts(PizzaPage, limit);
     const drinks = await getDrinks(DrinksPage, 4);
