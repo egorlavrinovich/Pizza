@@ -17,7 +17,7 @@ import { usePagination } from "../hooks/Pagination";
 import Drinks from "../components/DrinksBlock/Drinks";
 import { getDrinks } from "../API/fetchdrinks";
 import { getAllDrinks } from "../redux/Slice/AllPizzasSlice";
-import ArrowUp from '../components/UI/ArrowUp/ArrowUp';
+import ArrowUp from "../components/UI/ArrowUp/ArrowUp";
 function App() {
   const dispatch = useDispatch();
   const SearchItem = useSelector((state) => state.filter.popular); // Redux popular filter
@@ -29,7 +29,7 @@ function App() {
   const drinks = useSelector((state) => state.posts.Drinks); // all drinks
   const pizzes = useSelector((state) => state.posts.Pizzes); // all pizzes
   const lastelement = useRef(); // ref на lastelement
-  const ScrollElement = useRef() // For ArrowUP
+  const ScrollElement = useRef(); // For ArrowUP
   const [getItems, load, error] = Fetch(async function getPosts() {
     const items = await fetchposts(PizzaPage, limit);
     const drinks = await getDrinks(DrinksPage, 4);
@@ -42,7 +42,9 @@ function App() {
   usePagination(lastelement, PizzaPage >= 4 && DrinksPage < 3, load, () =>
     dispatch(SetDrinkPage(DrinksPage + 1))
   ); // Infinity pagination for Drinks
-  const Pages = useMemo(()=>{getItems();},[PizzaPage, DrinksPage])
+  const Pages = useMemo(() => {
+    getItems();
+  }, [PizzaPage, DrinksPage]);
   const SortedPosts = UseSortedPosts(
     Searchcategory,
     SearchItem,
@@ -65,10 +67,10 @@ function App() {
     <div className="wrapper">
       <Header></Header>
       <div className="content">
-      <ArrowUp observeelement={ScrollElement} />
-        <div className="container">
+        <ArrowUp observeelement={ScrollElement} />
+        <div className="container" ref={ScrollElement}>
           <Panel sort={SetSearchItem} categories={SetCategory}></Panel>
-          <h2 className="content__title" ref={ScrollElement}>Пиццы</h2>
+          {SortedPosts.length >= 1 && <h2 className="content__title">Пиццы</h2>}
           <div className="content__items">
             {!error ? (
               (load && !pizzes.length && <Loader />) || (
@@ -76,7 +78,9 @@ function App() {
                   <Pizza pizza={SortedPosts} />
                   {PizzaPage >= 3 && (
                     <div className="container_drinks">
-                      <h2 className="content__title">Напитки</h2>
+                      {SortedDrinks.length >= 1 && (
+                        <h2 className="content__title">Напитки</h2>
+                      )}
                       <div className="content__items">
                         <Drinks drinks={SortedDrinks} />
                       </div>
