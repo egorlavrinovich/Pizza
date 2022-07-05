@@ -123,9 +123,9 @@ const Svg = ({ svg }) => {
   viewBox="0 0 24 24"
   fill="none"
   stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
+  strokeWidth="2"
+  strokeLinecap="round"
+  strokeLinejoin="round"
 >
   <circle cx="12" cy="12" r="10" />
   <polyline points="16 12 12 8 8 12" />
@@ -149,6 +149,13 @@ const Svg = ({ svg }) => {
           <line x1="6" y1="6" x2="18" y2="18" />
         </svg>
       );
+       case 'arrowleft':
+        return(
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="25" focusable="false" viewBox="0 0 18 14">
+  <path fill="none" stroke="currentColor" stroke-linecap="round" d="M4 3L.9 6.1c-.2.2-.2.5 0 .7L4 10M1 6.5h10.5"/>
+</svg>
+
+        );
     default:
       return "Incorrect way";
   }

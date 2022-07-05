@@ -65,12 +65,13 @@ function App() {
   }
   return (
     <div className="wrapper">
-      <Header></Header>
+      <Header />
       <div className="content">
         <ArrowUp observeelement={ScrollElement} />
-        <div className="container" ref={ScrollElement}>
+        <div className="container">
           <Panel sort={SetSearchItem} categories={SetCategory}></Panel>
           {SortedPosts.length >= 1 && <h2 className="content__title">Пиццы</h2>}
+          <div ref={ScrollElement} ></div>
           <div className="content__items">
             {!error ? (
               (load && !pizzes.length && <Loader />) || (

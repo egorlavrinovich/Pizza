@@ -1,10 +1,11 @@
+import classNames from 'classnames';
 import React from "react";
 import styl from "./input.module.scss";
-const Input = ({ value, Change }) => {
+const Input = ({ value, Change, placeholder='Введите название пиццы',find=false, type }) => {
   return (
     <div className={styl.root}>
       <svg
-        className={styl.find}
+        className={classNames(find&&styl.find||styl.none)}
         viewBox="0 0 32 32"
         xmlns="http://www.w3.org/2000/svg"
       >
@@ -31,10 +32,10 @@ const Input = ({ value, Change }) => {
       </svg>
       <input
         value={value}
+        type={type}
         onChange={(e) => Change(e.target.value)}
-        type="text"
         className={styl.input}
-        placeholder="Введите название пиццы"
+        placeholder={placeholder}
       />
     </div>
   );

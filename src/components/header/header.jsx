@@ -24,7 +24,7 @@ const Header = () => {
               </div>
             </div>
           </Link>
-          <Input value={state} Change={setstate} />
+          <Input value={state} Change={setstate} find={true} />
           <Shopingcart></Shopingcart>
         </div>
       </div>
